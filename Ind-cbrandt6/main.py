@@ -19,12 +19,9 @@ class Game:
 
         # This is the title bar caption
         Py.display.set_caption(TITLE)
-
-        # Create the fps clock
-        self.fpsClock = Py.time.Clock()
-
+        # Create sprite group
         self.sprites = Py.sprite.Group()
-
+        # Create the player
         self.player = Player.__init__(self)
 
     # Main game loop
@@ -32,8 +29,6 @@ class Game:
 
         self.run = True
         while self.run:
-            # FPS Clock
-            self.fpsClock.tick(FPS)
 
             # Check for events
             self.events()

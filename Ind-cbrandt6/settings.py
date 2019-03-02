@@ -1,3 +1,8 @@
+import pygame
+from pygame.locals import *
+
+pygame.init()
+
 # Define colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -17,3 +22,8 @@ TITLE = "Extreme Platformer"
 
 # Player size
 playerSize = 20
+
+# Standard velocity
+VELOCITY = 10
+
+

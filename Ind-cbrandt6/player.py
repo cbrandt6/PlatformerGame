@@ -23,16 +23,16 @@ class Player(PY.sprite.Sprite):
         self.keys = PY.key.get_pressed()
 
         if self.keys[PY.K_a]:
-            self.playerVX = -5
+            self.playerVX = -VELOCITY
 
         if self.keys[PY.K_d]:
-            self.playerVX = 5
+            self.playerVX = VELOCITY
 
         if self.keys[PY.K_w]:
-            self.playerVY = -5
+            self.playerVY = -VELOCITY
 
         if self.keys[PY.K_s]:
-            self.playerVY = 5
+            self.playerVY = VELOCITY
 
         # Add the velocity to the rectangle X and Y
         self.rect.x += self.playerVX
@@ -40,7 +40,14 @@ class Player(PY.sprite.Sprite):
 
         # This is the player friction
         # If the velocity is not 0 it will be decremented until it is 0
-        if self.playerVX != 0:
+        # Player VX
+        if self.playerVX > 0:
             self.playerVX -= 1
-        if self.playerVY != 0:
+        elif self.playerVX < 0:
+            self.playerVX += 1
+
+        # Player VY
+        if self.playerVY > 0:
             self.playerVY -= 1
+        elif self.playerVY < 0:
+            self.playerVY += 1
