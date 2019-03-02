@@ -50,8 +50,7 @@ class Game:
         self.sprites.update()
         # Update the display
         Py.display.update()
-        # Update player position HOPEFULLY
-        self.player.update()
+
     # Handle game loop events
     def events(self):
         # Event handler to see if game has been closed
