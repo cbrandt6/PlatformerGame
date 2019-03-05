@@ -1,7 +1,5 @@
-import pygame
-from pygame.locals import *
 
-pygame.init()
+import pygame
 
 # Define colors
 BLACK = (0, 0, 0)
@@ -15,7 +13,8 @@ HEIGHT = 800
 WIDTH = 900
 
 # Set the FPS
-FPS = 60
+# Unused
+FPS = 100
 
 # Window title
 TITLE = "Extreme Platformer"
@@ -24,6 +23,14 @@ TITLE = "Extreme Platformer"
 playerSize = 20
 
 # Standard velocity
-VELOCITY = 10
+VELOCITY = 100
 
+#Deceleration constant
+DECELERATION = 10
+
+# Create a clock
+Clock = pygame.time.Clock()
+
+# Since clock.get_time does not like to be stored in a variable,
+# DT is calculated as clock.get_time() / 1000 when it is needed
 

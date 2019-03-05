@@ -2,7 +2,7 @@ import pygame as Py
 from pygame.locals import *
 
 from player import *
-from settings import *
+import settings
 
 
 class Game:
@@ -15,10 +15,10 @@ class Game:
         Py.init()
 
         # Create the display surface
-        self.DISPLAYSURF = Py.display.set_mode((WIDTH, HEIGHT), 0, 32)
+        self.DISPLAYSURF = Py.display.set_mode((settings.WIDTH, settings.HEIGHT), 0, 32)
 
         # This is the title bar caption
-        Py.display.set_caption(TITLE)
+        Py.display.set_caption(settings.TITLE)
         # Create sprite group
         self.sprites = Py.sprite.Group()
         # Create the player
@@ -29,7 +29,7 @@ class Game:
 
         self.run = True
         while self.run:
-
+            settings.Clock.tick(settings.FPS)
             # Check for events
             self.events()
 
@@ -38,6 +38,10 @@ class Game:
 
             # Draw the new screen
             self.draw()
+
+            # Tick the clock
+            # print("Clock get time =", settings.Clock.get_time())
+            # print("Time delta =", settings.Clock.get_time() / 1000)
 
     # Perform game loop updates
     def update(self):
@@ -58,9 +62,9 @@ class Game:
     # Draw game loop things
     def draw(self):
         # Redraw the window
-        self.DISPLAYSURF.fill(BLACK)
+        self.DISPLAYSURF.fill(settings.BLACK)
         # This is just kinda style rectangle
-        Py.draw.rect(self.DISPLAYSURF, BLUE, (10, 10, 880, 780))
+        Py.draw.rect(self.DISPLAYSURF, settings.BLUE, (10, 10, 880, 780))
         self.sprites.draw(self.DISPLAYSURF)
 
     # Reset the game
@@ -83,3 +87,5 @@ while game.play:
 
 
 Py.quit()
+
+# just here to change so i can commit to git
