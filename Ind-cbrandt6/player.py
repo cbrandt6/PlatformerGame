@@ -1,6 +1,7 @@
 import pygame as Py
 import settings
 
+vec = Py.math.Vector2
 
 
 class Player(Py.sprite.Sprite):
@@ -10,45 +11,38 @@ class Player(Py.sprite.Sprite):
 
         # Create player size and load image for player
         self.image = Py.Surface((settings.playerSize, settings.playerSize))
-        # self.image.fill(BLACK)
         self.rect = self.image.get_rect()
         self.image = Py.image.load('Square.png')
 
-        # Initialize player velocity in x and y
-        self.playerVX = 0
-        self.playerVY = 0
+        self.rect = (0, 0)
+        # Initialize player vectors
+        self.position = vec(0, 0)
+        self.velocity = vec(0, 0)
+        self.acceleration = vec(0, 0)
 
     def update(self):
+
+        # Default the acceleration to 0
+        # Otherwise the sprite will oscillate when no keys are pressed
+        self.acceleration = vec(0, 0)
 
         # Player velocity depending on which keys are pressed
         self.keys = Py.key.get_pressed()
 
+        # Motion in the x axis
         if self.keys[Py.K_a]:
-            self.playerVX = -settings.VELOCITY
+            self.acceleration.x = -settings.ACC
 
         if self.keys[Py.K_d]:
-            self.playerVX = settings.VELOCITY
+            self.acceleration.x = settings.ACC
 
-        if self.keys[Py.K_w]:
-            self.playerVY = -settings.VELOCITY
+        # Using physics equations for motion
+        # Applies friction and creates a max speed
+        self.acceleration += self.velocity * settings.FRIC
 
-        if self.keys[Py.K_s]:
-            self.playerVY = settings.VELOCITY
+        # Add acc to velocity and velocity equation to position
+        self.velocity += self.acceleration
+        self.position += self.velocity + (0.5 * self.acceleration)
 
-        # Add the velocity to the rectangle X and Y
-        self.rect.x += self.playerVX * settings.Clock.get_time() / 1000  # DT
-        self.rect.y += self.playerVY * settings.Clock.get_time() / 1000  # DT
-
-        # This is the player friction
-        # If the velocity is not 0 it will be decremented until it is 0
-        # Player VX
-        if self.playerVX > 0:
-            self.playerVX -= settings.DECELERATION
-        elif self.playerVX < 0:
-            self.playerVX += settings.DECELERATION
-
-        # Player VY
-        if self.playerVY > 0:
-            self.playerVY -= settings.DECELERATION
-        elif self.playerVY < 0:
-            self.playerVY += settings.DECELERATION
+        # Update the postion
+        self.rect = self.position

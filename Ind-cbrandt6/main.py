@@ -39,9 +39,6 @@ class Game:
             # Draw the new screen
             self.draw()
 
-            # Tick the clock
-            # print("Clock get time =", settings.Clock.get_time())
-            # print("Time delta =", settings.Clock.get_time() / 1000)
 
     # Perform game loop updates
     def update(self):

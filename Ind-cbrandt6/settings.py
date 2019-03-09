@@ -22,15 +22,12 @@ TITLE = "Extreme Platformer"
 # Player size
 playerSize = 20
 
-# Standard velocity
-VELOCITY = 100
-
-#Deceleration constant
-DECELERATION = 10
+# Physics attributes
+ACC = 0.8
+FRIC = -0.12
 
 # Create a clock
 Clock = pygame.time.Clock()
 
-# Since clock.get_time does not like to be stored in a variable,
-# DT is calculated as clock.get_time() / 1000 when it is needed
+
 
