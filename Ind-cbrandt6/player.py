@@ -1,5 +1,6 @@
 import pygame as Py
 import settings
+import math
 
 vec = Py.math.Vector2
 
@@ -38,11 +39,17 @@ class Player(Py.sprite.Sprite):
 
         # Using physics equations for motion
         # Applies friction and creates a max speed
+
+        # a = v * friction
         self.acceleration += self.velocity * settings.FRIC
+        print("accel = ", self.acceleration)
 
-        # Add acc to velocity and velocity equation to position
-        self.velocity += self.acceleration
-        self.position += self.velocity + (0.5 * self.acceleration)
+        # vf = vi + at
+        self.velocity += self.acceleration * settings.dt
 
-        # Update the postion
+        # dX = v * dt + 1/2at^2
+        # Velocity was already multiplied by time
+        self.position += self.velocity + (0.5 * self.acceleration * math.pow(settings.dt, 2))
+
+        # Update the position
         self.rect = self.position
