@@ -13,11 +13,11 @@ class Player(Py.sprite.Sprite):
         # Create player size and load image for player
         self.image = Py.Surface((settings.playerSize, settings.playerSize))
         self.rect = self.image.get_rect()
-        self.image = Py.image.load('Square.png')
+        self.image = Py.image.load('Square.png').convert()
 
-        self.rect = (0, 0)
+        self.rect = (settings.HEIGHT - settings.playerSize, 0)
         # Initialize player vectors
-        self.position = vec(0, 0)
+        self.position = vec(0, settings.HEIGHT - settings.playerSize)
         self.velocity = vec(0, 0)
         self.acceleration = vec(0, 0)
 
@@ -46,6 +46,7 @@ class Player(Py.sprite.Sprite):
 
         # vf = vi + at
         self.velocity += self.acceleration * settings.dt
+        print("vel =", self.velocity)
 
         # dX = v * dt + 1/2at^2
         # Velocity was already multiplied by time

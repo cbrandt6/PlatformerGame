@@ -30,7 +30,7 @@ class Game:
         self.run = True
         while self.run:
 
-            print("fps =", settings.Clock.get_fps())
+            # print("fps =", settings.Clock.get_fps())
             # Check for events
             self.events()
 
@@ -48,8 +48,8 @@ class Game:
         # Update the display
         Py.display.update()
         # Tick clock
-        settings.dt = settings.Clock.tick() / 1000
-        print("dt =", settings.dt)
+        settings.dt = settings.Clock.tick(settings.FPS) / 1000
+        # print("dt =", settings.dt)
 
     # Handle game loop events
     def events(self):
@@ -82,9 +82,7 @@ class Game:
 
 
 game = Game()
-
-while game.play:
-    game.new()
+game.new()
 
 
 Py.quit()
