@@ -25,6 +25,8 @@ playerSize = 20
 # Physics attributes
 ACC = 7
 FRIC = -1
+GRAV = -25
+JUMP = 75
 
 # Create a clock
 Clock = pygame.time.Clock()

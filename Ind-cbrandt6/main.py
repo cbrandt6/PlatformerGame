@@ -30,7 +30,7 @@ class Game:
         self.run = True
         while self.run:
 
-            # print("fps =", settings.Clock.get_fps())
+            # dprint("fps =", settings.Clock.get_fps())
             # Check for events
             self.events()
 
