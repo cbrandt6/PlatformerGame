@@ -13,7 +13,7 @@ HEIGHT = 800
 WIDTH = 900
 
 # Set the FPS
-FPS = 30
+FPS = 60
 
 # Window title
 TITLE = "Extreme Platformer"
@@ -26,7 +26,7 @@ playerSize = 20
 ACC = 7
 FRIC = -1
 GRAV = -25
-JUMP = 75
+JUMP = 25
 
 # Create a clock
 Clock = pygame.time.Clock()
