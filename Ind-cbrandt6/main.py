@@ -65,7 +65,7 @@ class Game:
         # Redraw the window
         self.DISPLAYSURF.fill(settings.BLACK)
         # This is just kinda style rectangle
-        Py.draw.rect(self.DISPLAYSURF, settings.BLUE, (10, 10, 880, 780))
+        Py.draw.rect(self.DISPLAYSURF, settings.BLUE, (10, 10, settings.WIDTH - 20, settings.HEIGHT - 20))
         self.sprites.draw(self.DISPLAYSURF)
 
     # Reset the game

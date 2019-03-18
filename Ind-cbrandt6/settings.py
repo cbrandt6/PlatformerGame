@@ -9,8 +9,8 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 
 # Window size
-HEIGHT = 800
-WIDTH = 900
+HEIGHT = 900
+WIDTH = 1500
 
 # Set the FPS
 FPS = 60
@@ -21,12 +21,14 @@ TITLE = "Extreme Platformer"
 # Player size
 playerSize = 20
 
+floorYCoord = HEIGHT - playerSize - 10
+
 
 # Physics attributes
-ACC = 7
+ACC = 8
 FRIC = -1
-GRAV = -25
-JUMP = 25
+GRAV = -10
+JUMP = 14
 
 # Create a clock
 Clock = pygame.time.Clock()
