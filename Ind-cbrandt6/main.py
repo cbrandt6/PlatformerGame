@@ -29,7 +29,8 @@ class Game:
 
         self.run = True
         while self.run:
-            settings.Clock.tick(settings.FPS)
+
+            # dprint("fps =", settings.Clock.get_fps())
             # Check for events
             self.events()
 
@@ -39,9 +40,6 @@ class Game:
             # Draw the new screen
             self.draw()
 
-            # Tick the clock
-            # print("Clock get time =", settings.Clock.get_time())
-            # print("Time delta =", settings.Clock.get_time() / 1000)
 
     # Perform game loop updates
     def update(self):
@@ -49,6 +47,9 @@ class Game:
         self.sprites.update()
         # Update the display
         Py.display.update()
+        # Tick clock
+        settings.dt = settings.Clock.tick(settings.FPS) / 1000
+        # print("dt =", settings.dt)
 
     # Handle game loop events
     def events(self):
@@ -64,7 +65,7 @@ class Game:
         # Redraw the window
         self.DISPLAYSURF.fill(settings.BLACK)
         # This is just kinda style rectangle
-        Py.draw.rect(self.DISPLAYSURF, settings.BLUE, (10, 10, 880, 780))
+        Py.draw.rect(self.DISPLAYSURF, settings.BLUE, (10, 10, settings.WIDTH - 20, settings.HEIGHT - 20))
         self.sprites.draw(self.DISPLAYSURF)
 
     # Reset the game
@@ -81,12 +82,9 @@ class Game:
 
 
 game = Game()
-
-while game.play:
-    game.new()
+game.new()
 
 
 Py.quit()
 
-# just here to change so i can commit to git
-# another test change 
+
