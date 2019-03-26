@@ -28,7 +28,7 @@ floorYCoord = HEIGHT - playerSize - 10
 ACC = 8
 FRIC = -1
 GRAV = -10
-JUMP = 14
+JUMP = 11
 
 # Create a clock
 Clock = pygame.time.Clock()
