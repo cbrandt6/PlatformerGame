@@ -3,22 +3,18 @@ from pygame.locals import *
 
 from player import *
 import settings
-
+import levelOne
 
 class Game:
     # Initialize game window
     def __init__(self):
+        Py.init()
         # Initialize game loop variable
         self.play = True
 
-        # Initialize pygame
-        Py.init()
+        # Initialize the level
+        self.level = levelOne.levels()
 
-        # Create the display surface
-        self.DISPLAYSURF = Py.display.set_mode((settings.WIDTH, settings.HEIGHT), 0, 32)
-
-        # This is the title bar caption
-        Py.display.set_caption(settings.TITLE)
         # Create sprite group
         self.sprites = Py.sprite.Group()
         # Create the player
@@ -30,7 +26,7 @@ class Game:
         self.run = True
         while self.run:
 
-            # dprint("fps =", settings.Clock.get_fps())
+            # print("fps =", settings.Clock.get_fps())
             # Check for events
             self.events()
 
@@ -62,12 +58,8 @@ class Game:
 
     # Draw game loop things
     def draw(self):
-        # Redraw the window
-        self.DISPLAYSURF.fill(settings.BLACK)
-        # This is just kinda style rectangle
-        Py.draw.rect(self.DISPLAYSURF, settings.BLUE, (10, 10, settings.WIDTH - 20, settings.HEIGHT - 20))
-
-        self.sprites.draw(self.DISPLAYSURF)
+        self.level.redraw()
+        self.sprites.draw(self.level.DISPLAYSURF)
 
     # Reset the game
     def new(self):
@@ -84,8 +76,6 @@ class Game:
 
 game = Game()
 game.new()
-
-
 Py.quit()
 
 
