@@ -47,7 +47,7 @@ class Game:
         # Tick clock
         settings.dt = settings.Clock.tick(settings.FPS) / 1000
         # print("dt =", settings.dt)
-        # print(settings.Clock.get_fps())
+        print(settings.Clock.get_fps())
 
     # Handle game loop events
     def events(self):
@@ -60,7 +60,6 @@ class Game:
 
     # Draw game loop things
     def draw(self):
-        self.level.redraw()
         self.sprites.draw(self.level.DISPLAYSURF)
 
     # Reset the game
@@ -69,8 +68,8 @@ class Game:
         self.sprites = Py.sprite.Group()
         self.player = Player()
         self.sprites.add(self.player)
-        for x in self.level.rectArr:
-            self.sprites.add(x)
+        for i in range( len(self.level.rectArr) -1 ):
+            self.sprites.add(self.level.rectArr[i])
         self.run()
 
     # Game Over screen

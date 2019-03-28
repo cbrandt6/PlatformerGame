@@ -28,6 +28,8 @@ class levels:
         # This is just kinda style rectangle
         py.draw.rect(self.DISPLAYSURF, settings.BLUE, (10, 10, settings.WIDTH - 20, settings.HEIGHT - 20))
 
+        self.lvlone()
+
     def redraw(self):
         # Redraw the window
         # self.DISPLAYSURF.fill(settings.BLACK)
@@ -42,10 +44,8 @@ class levels:
 
         for i in range(14):
             # Call the sprite constructor
-            py.sprite.Sprite.__init__(self)
-            image = py.Surface([50, 8])
-            image.fill(settings.BLUE)
-
+            image = py.sprite.Sprite()
+            
             rect = image.get_rect()
             # Alternates between right and left side platforms
             if i % 2 != 0:
@@ -55,7 +55,7 @@ class levels:
                 rect.x = 50
             rect.y = y
             # Rectangles are defined with the surface, color, (x, y, width, height)
-            self.rectArr.append(rect)
+            self.rectArr.append(image)
             # Decrement y so later rects are drawn higher
             y = y - 50
 
@@ -65,7 +65,7 @@ class levels:
         rectTall = image.get_rect()
         rect.x = 275
         rect.y = 150
-        self.rectArr.append(rectTall)
+        self.rectArr.append(image)
 
     def lvltwo(self):
         pass
