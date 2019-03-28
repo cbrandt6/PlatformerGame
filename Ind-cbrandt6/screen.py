@@ -27,7 +27,6 @@ class levels:
         self.DISPLAYSURF.fill(settings.BLACK)
         # This is just kinda style rectangle
         py.draw.rect(self.DISPLAYSURF, settings.BLUE, (10, 10, settings.WIDTH - 20, settings.HEIGHT - 20))
-
         self.lvlone()
 
     def redraw(self):
@@ -40,38 +39,35 @@ class levels:
     def lvlone(self):
         self.DISPLAYSURF.fill(settings.BLACK)
 
+        rectArr = []
         y = settings.HEIGHT - 50
 
         for i in range(14):
-            # Call the sprite constructor
-            image = py.sprite.Sprite()
-            
-            rect = image.get_rect()
+
             # Alternates between right and left side platforms
             if i % 2 != 0:
-                rect.x = 150
+                x = 150
 
             else:
-                rect.x = 50
-            rect.y = y
+                x = 50
+
             # Rectangles are defined with the surface, color, (x, y, width, height)
-            self.rectArr.append(image)
+            rectArr.append(py.draw.rect(self.DISPLAYSURF, settings.BLUE, (x, y, 50, 8)))
             # Decrement y so later rects are drawn higher
             y = y - 50
 
         # This is the tall barrier
-        image = py.Surface([8, settings.HEIGHT-150])
-        image.fill(settings.BLUE)
-        rectTall = image.get_rect()
-        rect.x = 275
-        rect.y = 150
-        self.rectArr.append(image)
+        rectArr.append(py.draw.rect(self.DISPLAYSURF, settings.BLUE, (275, 150, 8, settings.HEIGHT - 150)))
+
+
+
 
     def lvltwo(self):
         pass
 
     def lvlthree(self):
         pass
+
 
     def checkcollision(self):
         # TODO Run through array of rectangles and check them against the player sprite, you can use vector.reflect_ip
@@ -81,5 +77,6 @@ class levels:
                 return i
             else:
                 return -1
+
 
 

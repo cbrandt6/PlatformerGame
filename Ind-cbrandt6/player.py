@@ -76,7 +76,7 @@ class Player(Py.sprite.Sprite):
         if self.position.y < settings.floorYCoord:
             self.acceleration.y = -settings.GRAV
             self.velocity.y += self.acceleration.y * settings.dt
-            # print("y vel= ", self.velocity.y)
+            print("y vel= ", self.velocity.y)
             self.position.y += self.velocity.y + (0.5 * self.acceleration.y * math.pow(settings.dt, 2))
 
         else:
@@ -99,7 +99,7 @@ class Player(Py.sprite.Sprite):
         if self.position.y < 0:
             self.position.y = 0
 
-        # Keep the sprite from moving through the sides
+            # Keep the sprite from moving through the sides
         if self.position.x > settings.WIDTH - settings.playerSize:
             self.position.x = settings.WIDTH - settings.playerSize
         if self.position.x < 0:
