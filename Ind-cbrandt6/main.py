@@ -5,6 +5,7 @@ from player import *
 import settings
 import screen
 
+
 class Game:
     # Initialize game window
     def __init__(self):
@@ -37,7 +38,6 @@ class Game:
             # Draw the new screen
             self.draw()
 
-
     # Perform game loop updates
     def update(self):
         # update sprites
@@ -47,7 +47,7 @@ class Game:
         # Tick clock
         settings.dt = settings.Clock.tick(settings.FPS) / 1000
         # print("dt =", settings.dt)
-        print(settings.Clock.get_fps())
+        # print(settings.Clock.get_fps())
 
     # Handle game loop events
     def events(self):
@@ -69,6 +69,8 @@ class Game:
         self.sprites = Py.sprite.Group()
         self.player = Player()
         self.sprites.add(self.player)
+        for x in self.level.rectArr:
+            self.sprites.add(x)
         self.run()
 
     # Game Over screen

@@ -2,11 +2,11 @@ import pygame as Py
 import settings
 import math
 
+
 vec = Py.math.Vector2
 
 
 class Player(Py.sprite.Sprite):
-
     def __init__(self):
         Py.sprite.Sprite.__init__(self)
 
@@ -21,6 +21,7 @@ class Player(Py.sprite.Sprite):
         self.position = vec(0, settings.HEIGHT)
         self.velocity = vec(0, 0)
         self.acceleration = vec(0, 0)
+        self.keys = ''
 
     def update(self):
 
@@ -51,7 +52,6 @@ class Player(Py.sprite.Sprite):
         if self.position.y >= settings.floorYCoord:
             # print("y acc= ", self.acceleration.y)
             self.velocity.y = -settings.JUMP
-
 
     def physiccalc(self):
 
@@ -107,3 +107,5 @@ class Player(Py.sprite.Sprite):
 
         # Update the position
         self.rect = self.position
+
+
