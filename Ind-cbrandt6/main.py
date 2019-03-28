@@ -3,7 +3,7 @@ from pygame.locals import *
 
 from player import *
 import settings
-import levelOne
+import screen
 
 class Game:
     # Initialize game window
@@ -13,7 +13,8 @@ class Game:
         self.play = True
 
         # Initialize the level
-        self.level = levelOne.levels()
+        # Creates a screen object
+        self.level = screen.levels()
 
         # Create sprite group
         self.sprites = Py.sprite.Group()
@@ -46,6 +47,7 @@ class Game:
         # Tick clock
         settings.dt = settings.Clock.tick(settings.FPS) / 1000
         # print("dt =", settings.dt)
+        print(settings.Clock.get_fps())
 
     # Handle game loop events
     def events(self):

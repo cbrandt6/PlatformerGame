@@ -14,11 +14,11 @@ class Player(Py.sprite.Sprite):
         self.image = Py.Surface((settings.playerSize, settings.playerSize))
         self.rect = self.image.get_rect()
         self.image = Py.image.load('Square.png').convert()
-        self.rect = (0, settings.HEIGHT - settings.playerSize - 10)
+        self.rect = (0, settings.HEIGHT)
 
         # Initialize player vectors
         # Position is initialized so that sprite is aligned in the bottom left corner of the blue square
-        self.position = vec(0, settings.HEIGHT - settings.playerSize - 10)
+        self.position = vec(0, settings.HEIGHT)
         self.velocity = vec(0, 0)
         self.acceleration = vec(0, 0)
 

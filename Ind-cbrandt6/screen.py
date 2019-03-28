@@ -3,6 +3,7 @@ import settings
 
 # This file will contain all the level layouts, and will draw them when called from the main function
 DISPLAYSURF = ''
+
 class levels:
 
     def __init__(self):
@@ -23,12 +24,31 @@ class levels:
 
     def redraw(self):
         # Redraw the window
-        self.DISPLAYSURF.fill(settings.BLACK)
+        #self.DISPLAYSURF.fill(settings.BLACK)
         # This is just kinda style rectangle
-        py.draw.rect(self.DISPLAYSURF, settings.BLUE, (10, 10, settings.WIDTH - 20, settings.HEIGHT - 20))
+        #py.draw.rect(self.DISPLAYSURF, settings.BLUE, (10, 10, settings.WIDTH - 20, settings.HEIGHT - 20))
+        self.lvlone()
 
     def lvlone(self):
-        pass
+        self.DISPLAYSURF.fill(settings.BLACK)
+
+        rectArr = []
+        y = settings.HEIGHT - 50
+
+        for i in range(14):
+
+            if i % 2 != 0:
+                x = 150
+
+            else:
+                x = 50
+
+            # Rectangles are defined with the surface, color, (x, y, width, height)
+            rectArr.append(py.draw.rect(self.DISPLAYSURF, settings.BLUE, (x, y, 40, 8)))
+            # Decrement y so later rects are drawn higher
+            y = y - 50
+
+
 
     def lvltwo(self):
         pass
