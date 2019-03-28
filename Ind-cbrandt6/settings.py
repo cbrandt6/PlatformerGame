@@ -21,7 +21,7 @@ TITLE = "Extreme Platformer"
 # Player size
 playerSize = 20
 
-floorYCoord = HEIGHT - playerSize - 10
+floorYCoord = HEIGHT - playerSize
 
 
 # Physics attributes

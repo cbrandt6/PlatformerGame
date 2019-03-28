@@ -37,6 +37,7 @@ class levels:
 
         for i in range(14):
 
+            # Alternates between right and left side platforms
             if i % 2 != 0:
                 x = 150
 
@@ -44,11 +45,12 @@ class levels:
                 x = 50
 
             # Rectangles are defined with the surface, color, (x, y, width, height)
-            rectArr.append(py.draw.rect(self.DISPLAYSURF, settings.BLUE, (x, y, 40, 8)))
+            rectArr.append(py.draw.rect(self.DISPLAYSURF, settings.BLUE, (x, y, 50, 8)))
             # Decrement y so later rects are drawn higher
             y = y - 50
 
-
+        # This is the tall barrier
+        rectArr.append(py.draw.rect(self.DISPLAYSURF, settings.BLUE, (275, 150, 8, settings.HEIGHT-150)))
 
     def lvltwo(self):
         pass
@@ -56,5 +58,7 @@ class levels:
     def lvlthree(self):
         pass
 
+    def checkcollision(self):
+        pass
 
 
