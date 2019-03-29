@@ -7,14 +7,16 @@ vec = Py.math.Vector2
 
 
 class Player(Py.sprite.Sprite):
+
+
     def __init__(self):
         Py.sprite.Sprite.__init__(self)
-
+        global rect
         # Create player size and load image for player
         self.image = Py.Surface((settings.playerSize, settings.playerSize))
         self.rect = self.image.get_rect()
         self.image = Py.image.load('Square.png').convert()
-        self.rect = (0, settings.HEIGHT)
+
 
         # Initialize player vectors
         # Position is initialized so that sprite is aligned in the bottom left corner of the blue square
@@ -54,7 +56,10 @@ class Player(Py.sprite.Sprite):
             self.velocity.y = -settings.JUMP
 
     def physiccalc(self):
-
+        global rect
+        import screen
+        col = screen.checkcollision()
+        print(col)
         # Using physics equations for motion
         # Applies friction and creates a max speed
         # -------------- X Motion --------------
@@ -76,7 +81,7 @@ class Player(Py.sprite.Sprite):
         if self.position.y < settings.floorYCoord:
             self.acceleration.y = -settings.GRAV
             self.velocity.y += self.acceleration.y * settings.dt
-            print("y vel= ", self.velocity.y)
+            # print("y vel= ", self.velocity.y)
             self.position.y += self.velocity.y + (0.5 * self.acceleration.y * math.pow(settings.dt, 2))
 
         else:
@@ -105,7 +110,12 @@ class Player(Py.sprite.Sprite):
         if self.position.x < 0:
             self.position.x = 0
 
+        import screen
+        # screen.checkcollision()
         # Update the position
-        self.rect = self.position
+        # Update the positions separately so self.rect remains a rectangle
+        self.rect.x = self.position.x
+        self.rect.y = self.position.y
+        # print(self.rect.x)
 
 

@@ -8,6 +8,7 @@ import screen
 
 class Game:
     # Initialize game window
+
     def __init__(self):
         Py.init()
         # Initialize game loop variable
@@ -20,7 +21,8 @@ class Game:
         # Create sprite group
         self.sprites = Py.sprite.Group()
         # Create the player
-        self.player = Player.__init__(self)
+        # Player.__init__(self)
+        self.player = Player()
 
     # Main game loop
     def run(self):
@@ -47,7 +49,7 @@ class Game:
         # Tick clock
         settings.dt = settings.Clock.tick(settings.FPS) / 1000
         # print("dt =", settings.dt)
-        print(settings.Clock.get_fps())
+        # print(settings.Clock.get_fps())
 
     # Handle game loop events
     def events(self):
