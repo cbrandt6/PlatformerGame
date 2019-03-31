@@ -15,7 +15,7 @@ class Player(Py.sprite.Sprite):
         # Create player size and load image for player
         self.image = Py.Surface((settings.playerSize, settings.playerSize))
         self.rect = self.image.get_rect()
-        self.image = Py.image.load('Square.png').convert()
+        self.image = Py.image.load('Square.png')
 
 
         # Initialize player vectors

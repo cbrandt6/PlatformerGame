@@ -26,13 +26,16 @@ class levels:
 
     def redraw(self):
         # Redraw the window
-        # self.DISPLAYSURF.fill(settings.BLACK)
+        self.DISPLAYSURF.fill(settings.BLACK)
         # This is just kinda style rectangle
         # py.draw.rect(self.DISPLAYSURF, settings.BLUE, (10, 10, settings.WIDTH - 20, settings.HEIGHT - 20))
-        self.lvlone()
+        for i in rectArr:
+            py.draw.rect(self.DISPLAYSURF, settings.BLUE, i)
 
     def lvlone(self):
 
+        # Creating rectangle objects and appending them to a list
+        # They are not being drawn here
         global rectArr
         self.DISPLAYSURF.fill(settings.BLACK)
         y = settings.HEIGHT - 50
@@ -47,14 +50,14 @@ class levels:
                 x = 50
 
             # Rectangles are defined with the surface, color, (x, y, width, height)
-            rectArr.append(py.draw.rect(self.DISPLAYSURF, settings.BLUE, (x, y, 50, 8)))
+            rectArr.append(py.Rect(x, y, 50, 8))
             # Decrement y so later rects are drawn higher
             y = y - 50
 
             # print(rectArr[0].x)
 
         # This is the tall barrier
-        rectArr.append(py.draw.rect(self.DISPLAYSURF, settings.BLUE, (275, 150, 8, settings.HEIGHT - 150)))
+        rectArr.append(py.Rect(275, 150, 8, settings.HEIGHT - 150))
 
     def lvltwo(self):
         pass
@@ -69,9 +72,12 @@ def checkcollision():
     # TODO Run through array of rectangles and check them against the player sprite, you can use vector.reflect_ip
     # TODO stuff to bounce the sprite
     import main
-    for i in range(len(rectArr) - 1):
-        if rectArr[i].colliderect(main.game.player.rect):
-            return i
+    # print("rectArr Len = ", len(rectArr))
+    for rect in rectArr:
+        # print("rectArr[i].x = ", rectArr[i].x)
+        # The player is reached through main because it needs to be the instantiated player object
+        if rect.colliderect(main.game.player.rect):
+            return 0
         else:
             return -1
 

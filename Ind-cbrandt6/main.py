@@ -20,6 +20,7 @@ class Game:
 
         # Create sprite group
         self.sprites = Py.sprite.Group()
+
         # Create the player
         # Player.__init__(self)
         self.player = Player()
@@ -44,10 +45,13 @@ class Game:
     def update(self):
         # update sprites
         self.sprites.update()
+
         # Update the display
         Py.display.update()
+
         # Tick clock
         settings.dt = settings.Clock.tick(settings.FPS) / 1000
+
         # print("dt =", settings.dt)
         # print(settings.Clock.get_fps())
 
@@ -60,17 +64,26 @@ class Game:
                     self.play = False
                 self.run = False
 
-    # Draw game loop things
+    # Draw game things
     def draw(self):
+        '''
+        image = Py.Surface((settings.playerSize, settings.playerSize))
+        image.fill(settings.BLUE)
+        self.sprites.clear(self.level.DISPLAYSURF, image)
+        '''
         self.level.redraw()
         self.sprites.draw(self.level.DISPLAYSURF)
 
+
     # Reset the game
     def new(self):
-
+        # Creates new group of sprites
         self.sprites = Py.sprite.Group()
+        # Creates new player
         self.player = Player()
+        # Add player to sprite group
         self.sprites.add(self.player)
+        # Run
         self.run()
 
     # Game Over screen
