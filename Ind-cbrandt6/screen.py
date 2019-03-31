@@ -73,12 +73,16 @@ def checkcollision():
     # TODO stuff to bounce the sprite
     import main
     # print("rectArr Len = ", len(rectArr))
+    col = ''
     for rect in rectArr:
-        # print("rectArr[i].x = ", rectArr[i].x)
+        # print("rect.x = ", rect.x)
         # The player is reached through main because it needs to be the instantiated player object
         if rect.colliderect(main.game.player.rect):
-            return 0
+            col = 1
+            # If there is a collision there is no need to continue through the rest of the list
+            break
         else:
-            return -1
+            col = 0
 
+    return col
 

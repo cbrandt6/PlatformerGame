@@ -59,7 +59,8 @@ class Player(Py.sprite.Sprite):
         global rect
         import screen
         col = screen.checkcollision()
-        print(col)
+        if col != 0:
+            print(col)
         # Using physics equations for motion
         # Applies friction and creates a max speed
         # -------------- X Motion --------------
