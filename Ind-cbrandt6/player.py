@@ -8,10 +8,9 @@ vec = Py.math.Vector2
 
 class Player(Py.sprite.Sprite):
 
-
     def __init__(self):
         Py.sprite.Sprite.__init__(self)
-        global rect
+
         # Create player size and load image for player
         self.image = Py.Surface((settings.playerSize, settings.playerSize))
         self.rect = self.image.get_rect()
@@ -49,20 +48,20 @@ class Player(Py.sprite.Sprite):
 
     def jump(self):
 
-        # Easy fix but
+        import screen
         # If the player does not have a positive y acc then they are on a platform
-        if self.position.y >= settings.floorYCoord:
+        if self.position.y >= settings.floorYCoord or screen.checkcollision() == 1:
             # print("y acc= ", self.acceleration.y)
             self.velocity.y = -settings.JUMP
 
     def physiccalc(self):
-        global rect
         import screen
         col = screen.checkcollision()
         print(col)
         # Using physics equations for motion
         # Applies friction and creates a max speed
-        # -------------- X Motion --------------
+
+        # -------------- X Motion -------------- #
         # a = v * friction
         # TODO If the player hits the sides of a platform stop the x motion
         # The player has not hit the side of a platform motion as normal
@@ -88,7 +87,9 @@ class Player(Py.sprite.Sprite):
             elif col == 3:
                 self.position.x += 2
                 self.acceleration.x = 1
-        # -------------- Y Motion --------------
+        # -------------- X Motion -------------- #
+
+        # -------------- Y Motion -------------- #
         # print("y pos= ", self.position.y)
         # If the y position is not on the ground or a platform continue to accelerate downwards
         # TODO If the player hit the top or bottom of the platform stop their y motion
@@ -112,6 +113,12 @@ class Player(Py.sprite.Sprite):
             # Velocity was already multiplied by time
             self.position.y += self.velocity.y + (0.5 * self.acceleration.y * math.pow(settings.dt, 2))
 
+        if col == 1 or col == 0:
+            self.velocity.y = 0
+            self.acceleration.y = 0
+        # -------------- Y Motion -------------- #
+
+        # ----- Keep Sprite within the screen ----- #
         # Keeps sprite from falling through floor
         if self.position.y > settings.floorYCoord:
             self.position.y = settings.floorYCoord
@@ -124,6 +131,7 @@ class Player(Py.sprite.Sprite):
             self.position.x = settings.WIDTH - settings.playerSize
         if self.position.x < 0:
             self.position.x = 0
+        # ----- Keep Sprite within the screen ----- #
 
         # Update the position
         # Update the positions separately so self.rect remains a rectangle

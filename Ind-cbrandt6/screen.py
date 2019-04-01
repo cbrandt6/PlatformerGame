@@ -73,6 +73,7 @@ def checkcollision():
     # TODO stuff to bounce the sprite
     import main
     # print("rectArr Len = ", len(rectArr))
+    play = main.game.player
     for rect in rectArr:
         # print("rect.x = ", rect.x)
         # The player is reached through main because it needs to be the instantiated player object
@@ -84,20 +85,24 @@ def checkcollision():
             # If the player collides with the bottom of the platform, return 0, return 1 for the top
             # Return 2 for the left side, and 3 for the right side
 
-            # TODO Check the left side of the rect, right side of the player
-            if rect.left - main.game.player.rect.right < 2:
-                return 2
-            # TODO Check the right side
-            elif main.game.player.rect.left - rect.right < 2:
-                return 3
-            # TODO Compare the top of the rect, bottom of the player
-            # Two pixel tolerance
-            elif rect.top - main.game.player.rect.bottom < 2:
-                return 1
-            # TODO Check the bottom of the rect, top of the player
-            # The player top will have the greater value
-            elif main.game.player.rect.top - rect.bottom < 2:
+            # Player has hit the bottom
+            if play.rect.top - 1 < rect.bottom + 1 < play.rect.bottom + 1:
+                play.position.y = rect.bottom + 1
                 return 0
+            # Player has landed on the top
+            if play.rect.bottom + 1 >= rect.top - 1 > play.rect.top - 1:
+                play.position.y = rect.top - settings.playerSize + 1
+                play.velocity.y = 0
+                return 1
+            # If the right side of the player is equal to the left side of the platform
+            if play.rect.right + 1 > rect.left - 1 > play.rect.left - 1:
+                play.position.x = rect.left - settings.playerSize + 1
+                return 2
+            # If the left side of the player is equal to the right side of the platform
+            if play.rect.left - 1 < rect.right + 1 < play.rect.right + 1:
+                play.position.x = rect.right - 1
+                return 3
+
 
 
 
