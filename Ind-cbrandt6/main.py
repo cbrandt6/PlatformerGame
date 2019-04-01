@@ -66,11 +66,7 @@ class Game:
 
     # Draw game things
     def draw(self):
-        '''
-        image = Py.Surface((settings.playerSize, settings.playerSize))
-        image.fill(settings.BLUE)
-        self.sprites.clear(self.level.DISPLAYSURF, image)
-        '''
+        
         self.level.redraw()
         self.sprites.draw(self.level.DISPLAYSURF)
 

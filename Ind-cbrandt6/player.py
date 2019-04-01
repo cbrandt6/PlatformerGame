@@ -24,6 +24,8 @@ class Player(Py.sprite.Sprite):
         self.acceleration = vec(0, 0)
         self.keys = ''
 
+        self.onPlat = False
+
     def update(self):
 
         # Default the acceleration to 0
@@ -50,14 +52,16 @@ class Player(Py.sprite.Sprite):
 
         import screen
         # If the player does not have a positive y acc then they are on a platform
-        if self.position.y >= settings.floorYCoord or screen.checkcollision() == 1:
+
+        if self.position.y >= settings.floorYCoord or self.onPlat:
             # print("y acc= ", self.acceleration.y)
             self.velocity.y = -settings.JUMP
+            self.onPlat = False
 
     def physiccalc(self):
         import screen
         col = screen.checkcollision()
-        print(col)
+        #print(col)
         # Using physics equations for motion
         # Applies friction and creates a max speed
 
@@ -92,7 +96,6 @@ class Player(Py.sprite.Sprite):
         # -------------- Y Motion -------------- #
         # print("y pos= ", self.position.y)
         # If the y position is not on the ground or a platform continue to accelerate downwards
-        # TODO If the player hit the top or bottom of the platform stop their y motion
         # col = 1 means player is on top of a plat, 0 means they have hit the bottom
         if self.position.y < settings.floorYCoord and col != 1:
             self.acceleration.y = -settings.GRAV
@@ -113,9 +116,10 @@ class Player(Py.sprite.Sprite):
             # Velocity was already multiplied by time
             self.position.y += self.velocity.y + (0.5 * self.acceleration.y * math.pow(settings.dt, 2))
 
-        if col == 1 or col == 0:
+        if col == 1:
             self.velocity.y = 0
-            self.acceleration.y = 0
+            self.onPlat = True
+
         # -------------- Y Motion -------------- #
 
         # ----- Keep Sprite within the screen ----- #
