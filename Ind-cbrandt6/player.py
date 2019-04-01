@@ -59,27 +59,41 @@ class Player(Py.sprite.Sprite):
         global rect
         import screen
         col = screen.checkcollision()
-        if col != 0:
-            print(col)
+        print(col)
         # Using physics equations for motion
         # Applies friction and creates a max speed
         # -------------- X Motion --------------
         # a = v * friction
-        self.acceleration.x += self.velocity.x * settings.FRIC
-        # print("Xaccel = ", self.acceleration.x)
+        # TODO If the player hits the sides of a platform stop the x motion
+        # The player has not hit the side of a platform motion as normal
+        if col != 2 and col != 3:
+            self.acceleration.x += self.velocity.x * settings.FRIC
+            # print("Xaccel = ", self.acceleration.x)
 
-        # vf = vi + at
-        self.velocity.x += self.acceleration.x * settings.dt
-        # print("Xvel =", self.velocity.x)
+            # vf = vi + at
+            self.velocity.x += self.acceleration.x * settings.dt
+            # print("Xvel =", self.velocity.x)
 
-        # dX = v * dt + 1/2at^2
-        # Velocity was already multiplied by time
-        self.position.x += self.velocity.x + (0.5 * self.acceleration.x * math.pow(settings.dt, 2))
-
+            # dX = v * dt + 1/2at^2
+            # Velocity was already multiplied by time
+            self.position.x += self.velocity.x + (0.5 * self.acceleration.x * math.pow(settings.dt, 2))
+        # The player has hit the side of a platform
+        # Stop the x velocity and acceleration
+        elif col == 2 or col == 3:
+            self.velocity.x = 0
+            self.acceleration.x = 0
+            if col == 2:
+                self.position.x += -2
+                self.acceleration.x = -1
+            elif col == 3:
+                self.position.x += 2
+                self.acceleration.x = 1
         # -------------- Y Motion --------------
         # print("y pos= ", self.position.y)
         # If the y position is not on the ground or a platform continue to accelerate downwards
-        if self.position.y < settings.floorYCoord:
+        # TODO If the player hit the top or bottom of the platform stop their y motion
+        # col = 1 means player is on top of a plat, 0 means they have hit the bottom
+        if self.position.y < settings.floorYCoord and col != 1:
             self.acceleration.y = -settings.GRAV
             self.velocity.y += self.acceleration.y * settings.dt
             # print("y vel= ", self.velocity.y)
@@ -111,8 +125,6 @@ class Player(Py.sprite.Sprite):
         if self.position.x < 0:
             self.position.x = 0
 
-        import screen
-        # screen.checkcollision()
         # Update the position
         # Update the positions separately so self.rect remains a rectangle
         self.rect.x = self.position.x

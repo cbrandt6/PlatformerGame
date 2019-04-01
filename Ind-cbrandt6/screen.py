@@ -73,16 +73,33 @@ def checkcollision():
     # TODO stuff to bounce the sprite
     import main
     # print("rectArr Len = ", len(rectArr))
-    col = ''
     for rect in rectArr:
         # print("rect.x = ", rect.x)
         # The player is reached through main because it needs to be the instantiated player object
         if rect.colliderect(main.game.player.rect):
-            col = 1
+            # print("Plat top= ", rect.top)
+            # print("Play bottom= ", main.game.player.rect.bottom)
             # If there is a collision there is no need to continue through the rest of the list
-            break
-        else:
-            col = 0
+            # TODO Check to see if the collision occurred on one of the sides, or the top/bottom
+            # If the player collides with the bottom of the platform, return 0, return 1 for the top
+            # Return 2 for the left side, and 3 for the right side
 
-    return col
+            # TODO Check the left side of the rect, right side of the player
+            if rect.left - main.game.player.rect.right < 2:
+                return 2
+            # TODO Check the right side
+            elif main.game.player.rect.left - rect.right < 2:
+                return 3
+            # TODO Compare the top of the rect, bottom of the player
+            # Two pixel tolerance
+            elif rect.top - main.game.player.rect.bottom < 2:
+                return 1
+            # TODO Check the bottom of the rect, top of the player
+            # The player top will have the greater value
+            elif main.game.player.rect.top - rect.bottom < 2:
+                return 0
+
+
+
+
 
