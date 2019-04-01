@@ -105,7 +105,7 @@ class Player(Py.sprite.Sprite):
 
         else:
             # a = v * gravity
-            self.acceleration.y += self.velocity.y * settings.GRAV
+            self.acceleration.y = -settings.GRAV
             # print("Yaccel = ", self.acceleration.y)
 
             # vf = vi + at
@@ -119,7 +119,8 @@ class Player(Py.sprite.Sprite):
         if col == 1:
             self.velocity.y = 0
             self.onPlat = True
-
+        print("Yvel =", self.velocity.y)
+        print("Yaccel = ", self.acceleration.y)
         # -------------- Y Motion -------------- #
 
         # ----- Keep Sprite within the screen ----- #

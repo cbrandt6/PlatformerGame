@@ -66,7 +66,7 @@ class Game:
 
     # Draw game things
     def draw(self):
-        
+
         self.level.redraw()
         self.sprites.draw(self.level.DISPLAYSURF)
 
