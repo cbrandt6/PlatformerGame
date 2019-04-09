@@ -71,7 +71,7 @@ class levels:
             # This is the tall barrier
             rectArr.append(py.Rect(275, 150, 8, settings.HEIGHT - 150))
 
-            rectArr.append(py.Rect(500, settings.HEIGHT - 100, 100, 100))
+            rectArr.append(py.Rect(500, settings.HEIGHT - 100, 20, 20))
             self.firstDraw = False
 
     def lvltwo(self):
@@ -99,22 +99,22 @@ def checkcollision():
             # Return 2 for the left side, and 3 for the right side
 
             # Player has hit the bottom
-            if play.rect.top - 2 < rect.bottom + 2 < play.rect.bottom + 2:
-                play.position.y = rect.bottom + 2
+            if play.rect.top - 1 < rect.bottom + 1 < play.rect.bottom + 1:
+                play.position.y = rect.bottom + 1
                 return 0
 
             # Player has landed on the top
-            if play.rect.bottom + 2 >= rect.top - 2 > play.rect.top - 2:
-                play.position.y = rect.top - settings.playerSize + 2
+            if play.rect.bottom + 1 >= rect.top - 1 > play.rect.top - 1:
+                play.position.y = rect.top - settings.playerSize + 1
 
                 return 1
             # If the right side of the player is equal to the left side of the platform
-            if play.rect.right + 2 > rect.left - 2 > play.rect.left - 2:
-                play.position.x = rect.left - settings.playerSize + 2
+            if play.rect.right + 1 > rect.left - 1 > play.rect.left - 1:
+                play.position.x = rect.left - settings.playerSize + 1
                 return 2
             # If the left side of the player is equal to the right side of the platform
-            if play.rect.left - 2 < rect.right + 2 < play.rect.right + 2:
-                play.position.x = rect.right - 2
+            if play.rect.left - 1 < rect.right + 1 < play.rect.right + 1:
+                play.position.x = rect.right - 1
                 return 3
 
 
