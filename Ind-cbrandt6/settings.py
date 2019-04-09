@@ -12,7 +12,7 @@ HEIGHT = 900
 WIDTH = 1500
 
 # Set the FPS
-FPS = 31
+FPS = 60
 # Window title
 TITLE = "Extreme Platformer"
 
