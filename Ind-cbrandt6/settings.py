@@ -1,5 +1,4 @@
-
-import pygame
+import pygame as Py
 
 # Define colors
 BLACK = (0, 0, 0)
@@ -14,6 +13,7 @@ WIDTH = 1500
 
 # Set the FPS
 FPS = 100
+
 # Window title
 TITLE = "Extreme Platformer"
 
@@ -30,7 +30,7 @@ GRAV = -10
 JUMP = 8
 
 # Create a clock
-Clock = pygame.time.Clock()
+Clock = Py.time.Clock()
 
 dt = 0
 

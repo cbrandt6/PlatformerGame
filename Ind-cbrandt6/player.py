@@ -1,21 +1,20 @@
-import pygame as Py
+
 import settings
 import math
 
 
-vec = Py.math.Vector2
+vec = settings.Py.math.Vector2
 
 
-class Player(Py.sprite.Sprite):
+class Player(settings.Py.sprite.Sprite):
 
     def __init__(self):
-        Py.sprite.Sprite.__init__(self)
+        settings.Py.sprite.Sprite.__init__(self)
 
         # Create player size and load image for player
-        self.image = Py.Surface((settings.playerSize, settings.playerSize))
+        self.image = settings.Py.Surface((settings.playerSize, settings.playerSize))
         self.rect = self.image.get_rect()
-        self.image = Py.image.load('Square.png')
-
+        self.image = settings.Py.image.load('Square.png')
 
         # Initialize player vectors
         # Position is initialized so that sprite is aligned in the bottom left corner of the blue square
@@ -33,18 +32,21 @@ class Player(Py.sprite.Sprite):
         self.acceleration = vec(0, 0)
 
         # Player velocity depending on which keys are pressed
-        self.keys = Py.key.get_pressed()
+        self.keys = settings.Py.key.get_pressed()
 
         # Motion in the x axis
-        if self.keys[Py.K_a]:
+        if self.keys[settings.Py.K_a]:
             self.acceleration.x = -settings.ACC
 
-        if self.keys[Py.K_d]:
+        if self.keys[settings.Py.K_d]:
             self.acceleration.x = settings.ACC
 
         # Motion in the y axis
-        if self.keys[Py.K_SPACE]:
+        if self.keys[settings.Py.K_SPACE]:
             self.jump()
+
+        if self.keys[settings.Py.K_ESCAPE]:
+            settings.Py.quit()
 
         self.physiccalc()
 
@@ -67,7 +69,6 @@ class Player(Py.sprite.Sprite):
 
         # -------------- X Motion -------------- #
         # a = v * friction
-        # TODO If the player hits the sides of a platform stop the x motion
         # The player has not hit the side of a platform motion as normal
         if col != 2 and col != 3:
             self.acceleration.x += self.velocity.x * settings.FRIC
@@ -75,7 +76,6 @@ class Player(Py.sprite.Sprite):
 
             # vf = vi + at
             self.velocity.x += self.acceleration.x * settings.dt
-            # print("Xvel =", self.velocity.x)
 
             # dX = v * dt + 1/2at^2
             # Velocity was already multiplied by time
