@@ -119,8 +119,8 @@ class Player(Py.sprite.Sprite):
         if col == 1:
             self.velocity.y = 0
             self.onPlat = True
-        print("Yvel =", self.velocity.y)
-        print("Yaccel = ", self.acceleration.y)
+        # print("Yvel =", self.velocity.y)
+        # print("Yaccel = ", self.acceleration.y)
         # -------------- Y Motion -------------- #
 
         # ----- Keep Sprite within the screen ----- #

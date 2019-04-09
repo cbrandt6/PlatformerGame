@@ -53,7 +53,7 @@ class Game:
         settings.dt = settings.Clock.tick(settings.FPS) / 1000
 
         # print("dt =", settings.dt)
-        # print(settings.Clock.get_fps())
+        print(settings.Clock.get_fps())
 
     # Handle game loop events
     def events(self):
