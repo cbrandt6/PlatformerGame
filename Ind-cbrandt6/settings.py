@@ -25,9 +25,9 @@ floorYCoord = HEIGHT - playerSize
 
 
 # Physics attributes
-ACC = 8
+ACC = 6
 FRIC = -1
-GRAV = -5
+GRAV = -7
 JUMP = 4
 
 # Create a clock

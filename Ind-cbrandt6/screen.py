@@ -57,7 +57,7 @@ class levels:
         if self.firstDraw:
             # Clear the rectangle list in case there are leftovers from something
             rectArr.clear()
-            endingCoords = (1350, 130)
+            endingCoords = (1340, 50)
             # Initial height of the platforms
             y = settings.HEIGHT - 100
 
@@ -79,8 +79,8 @@ class levels:
 
             # Next set of platforms, leading to the end of the level
             x = 400
-            y = settings.HEIGHT - 100
-            for i in range(6):
+            y = settings.HEIGHT
+            for i in range(7):
                     x += 100
                     y -= 100
                     # Rectangles are defined with the surface, color, (x, y, width, height)
