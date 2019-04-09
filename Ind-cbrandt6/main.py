@@ -1,14 +1,9 @@
-import pygame as Py
-from pygame.locals import *
-
 from player import *
-import settings
+from settings import *
 import screen
 
 
 class Game:
-    # Initialize game window
-
     def __init__(self):
         Py.init()
         # Initialize game loop variable
@@ -43,17 +38,18 @@ class Game:
 
     # Perform game loop updates
     def update(self):
+
         # update sprites
-        self.sprites.update()
+        self.player.update()
 
         # Update the display
-        Py.display.update()
+        Py.display.flip()
 
         # Tick clock
-        settings.dt = settings.Clock.tick(settings.FPS) / 1000
+        settings.dt = settings.Clock.tick() / 1000
 
         # print("dt =", settings.dt)
-        # print(settings.Clock.get_fps())
+        print(settings.Clock.get_fps())
 
     # Handle game loop events
     def events(self):
@@ -66,19 +62,20 @@ class Game:
 
     # Draw game things
     def draw(self):
-
         self.level.redraw()
         self.sprites.draw(self.level.DISPLAYSURF)
-
 
     # Reset the game
     def new(self):
         # Creates new group of sprites
         self.sprites = Py.sprite.Group()
+
         # Creates new player
         self.player = Player()
+
         # Add player to sprite group
         self.sprites.add(self.player)
+
         # Run
         self.run()
 
