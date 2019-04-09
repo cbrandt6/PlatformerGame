@@ -12,6 +12,7 @@ HEIGHT = 900
 WIDTH = 1500
 
 # Set the FPS
+
 FPS = 144
 
 # Window title

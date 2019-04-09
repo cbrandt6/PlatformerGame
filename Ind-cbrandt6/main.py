@@ -48,6 +48,7 @@ class Game:
         # Tick clock
         settings.dt = settings.Clock.tick(settings.FPS) / 1000
 
+
         # print("dt =", settings.dt)
         print(settings.Clock.get_fps())
 
