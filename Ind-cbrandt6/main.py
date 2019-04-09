@@ -46,7 +46,7 @@ class Game:
         Py.display.flip()
 
         # Tick clock
-        settings.dt = settings.Clock.tick() / 1000
+        settings.dt = settings.Clock.tick(settings.FPS) / 1000
 
         # print("dt =", settings.dt)
         print(settings.Clock.get_fps())
