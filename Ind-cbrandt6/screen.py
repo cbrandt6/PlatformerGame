@@ -5,7 +5,7 @@ import settings
 rectArr = []
 
 levelcnt = 0
-
+endingCoords = ()
 class levels:
 
     def __init__(self):
@@ -28,6 +28,7 @@ class levels:
 
     def redraw(self):
         global levelcnt
+        global endingCoords
         # Redraw the window
         self.DISPLAYSURF.fill(settings.BLACK)
         # This is just kinda style rectangle
@@ -40,38 +41,57 @@ class levels:
         # If it is not the first time drawing the level, don't keep redrawing the rectangles
         if not self.firstDraw:
             for i in rectArr:
-                py.draw.rect(self.DISPLAYSURF, settings.BLUE, i)
+                # Check to see if the rectangle is the one that ends the level, and if it is paint it green
+                if levelcnt == 1 and i.left == endingCoords[0] and i.top == endingCoords[1]:
+                    py.draw.rect(self.DISPLAYSURF, settings.GREEN, i)
+
+                # Otherwise fill it as blue
+                else:
+                    py.draw.rect(self.DISPLAYSURF, settings.BLUE, i)
 
     def lvlone(self):
-
+        global endingCoords
         # Creating rectangle objects and appending them to a list
         # They are not being drawn here
 
         if self.firstDraw:
+            # Clear the rectangle list in case there are leftovers from something
             rectArr.clear()
-            y = settings.HEIGHT - 50
+            endingCoords = (1350, 130)
+            # Initial height of the platforms
+            y = settings.HEIGHT - 100
 
-            for i in range(14):
+            for i in range(6):
 
                 # Alternates between right and left side platforms
                 if i % 2 != 0:
                     x = 150
-
                 else:
                     x = 50
-
                 # Rectangles are defined with the surface, color, (x, y, width, height)
                 rectArr.append(py.Rect(x, y, 50, 8))
 
                 # Decrement y so later rects are drawn higher
-                y = y - 50
-
-                # print(rectArr[0].x)
+                y = y - 100
 
             # This is the tall barrier
             rectArr.append(py.Rect(275, 150, 8, settings.HEIGHT - 150))
 
-            rectArr.append(py.Rect(500, settings.HEIGHT - 100, 20, 20))
+            # Next set of platforms, leading to the end of the level
+            x = 400
+            y = settings.HEIGHT - 100
+            for i in range(6):
+                    x += 100
+                    y -= 100
+                    # Rectangles are defined with the surface, color, (x, y, width, height)
+                    rectArr.append(py.Rect(x, y, 50, 8))
+
+            # Platform on which the ending rect is "on"
+            rectArr.append(py.Rect(1300, 150, 100, 8))
+
+            # Rectangle that transports player to next level
+            rectArr.append(py.Rect(endingCoords[0], endingCoords[1], 20, 20))
+
             self.firstDraw = False
 
     def lvltwo(self):
@@ -86,14 +106,16 @@ class levels:
 def checkcollision():
     global rectArr
     global levelcnt
+    global endingCoords
     import main
     play = main.game.player
     for rect in rectArr:
 
         # The player is reached through main because it needs to be the instantiated player object
         if rect.colliderect(main.game.player.rect):
-            if levelcnt == 1 and rect.x == 500 and rect.y == settings.HEIGHT - 100:
-                levelcnt += 1
+            if levelcnt == 1 and rect.x == endingCoords[0] and rect.y == endingCoords[1]:
+                levelcnt = 2
+
             # If there is a collision there is no need to continue through the rest of the list
             # If the player collides with the bottom of the platform, return 0, return 1 for the top
             # Return 2 for the left side, and 3 for the right side
