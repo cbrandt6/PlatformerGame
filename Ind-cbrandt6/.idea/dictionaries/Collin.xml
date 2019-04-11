@@ -3,6 +3,7 @@
     <words>
       <w>collisionnumber</w>
       <w>coords</w>
+      <w>respawn</w>
     </words>
   </dictionary>
 </component>

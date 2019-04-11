@@ -118,6 +118,7 @@ class Player(settings.Py.sprite.Sprite):
         if self.col == 1:
             self.velocity.y = 0
             self.onPlat = True
+
         # print("Yvel =", self.velocity.y)
         # print("Yaccel = ", self.acceleration.y)
         # -------------- Y Motion -------------- #

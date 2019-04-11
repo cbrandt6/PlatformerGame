@@ -21,11 +21,10 @@ class levels:
         # Initialize the level fields
         self.rectArr = []
         self.hazardArr = []
-        self.levelcnt = 2
+        self.levelCnt = 2
         self.endingCoords = ()
         self.spawnCoords = ()
         self.firstDraw = True
-
         self.lvltwo()
 
     def redraw(self):
@@ -36,16 +35,16 @@ class levels:
         # py.draw.rect(self.DISPLAYSURF, settings.BLUE, (10, 10, settings.WIDTH - 20, settings.HEIGHT - 20))
         # print(self.firstDraw)
 
-        if self.levelcnt == 1:
+        if self.levelCnt == 1:
             self.lvlone()
-        if self.levelcnt == 2:
+        if self.levelCnt == 2:
             self.lvltwo()
 
         # If it is not the first time drawing the level, don't keep redrawing the rectangles
         if not self.firstDraw:
             for i in self.rectArr:
                 # Check to see if the rectangle is the one that ends the level, and if it is paint it green
-                if self.levelcnt == 1 and i.left == self.endingCoords[0] and i.top == self.endingCoords[1]:
+                if self.levelCnt == 1 and i.left == self.endingCoords[0] and i.top == self.endingCoords[1]:
                     py.draw.rect(self.DISPLAYSURF, settings.GREEN, i)
 
                 # Otherwise fill it as blue
@@ -66,10 +65,11 @@ class levels:
             self.rectArr.clear()
             self.endingCoords = (1340, 50)
             self.spawnCoords = (0, settings.HEIGHT - settings.playerSize)
+
             # Initial height of the platforms
             y = settings.HEIGHT - 100
 
-            for i in range(6):
+            for i in range(7):
 
                 # Alternates between right and left side platforms
                 if i % 2 != 0:
@@ -102,13 +102,14 @@ class levels:
 
             self.firstDraw = False
 
+
     def lvltwo(self):
 
         # If it is the first time drawing the level, clear the rectArr
         if self.firstDraw:
             self.rectArr.clear()
             self.endingCoords = (settings.WIDTH, settings.HEIGHT)
-            self.spawnCoords = (1, 125)
+            self.spawnCoords = (5, 5)
             # Starting platform
             self.rectArr.append(py.Rect(0, 150, 75, 8))
 
@@ -131,15 +132,18 @@ class levels:
 
             self.firstDraw = False
 
+
     def lvlthree(self):
         pass
 
     # return the current level
     def currlevel(self):
-        return self.levelcnt
+        return self.levelCnt
 
     def checkcollision(self):
+        # -1 is no collision, -2 is the ending rectangle
         # 0-3 will represent collision with platforms, 4 is a collision with a hazard
+
         import main
         play = main.game.player
         collisionnumber = -1
@@ -150,8 +154,9 @@ class levels:
                 # Change the level, and signify that it is the first drawing of the new level
                 # took out "self.levelcnt == 1 and" to test if it needs to be there
                 if rect.x == self.endingCoords[0] and rect.y == self.endingCoords[1]:
-                    self.levelcnt += 1
+                    self.levelCnt += 1
                     self.firstDraw = True
+                    return -2
 
                 # If there is a collision there is no need to continue through the rest of the list
                 # If the player collides with the bottom of the platform, return 0, return 1 for the top
@@ -179,6 +184,10 @@ class levels:
 
         for rect in self.hazardArr:
             if rect.colliderect(main.game.player.rect):
+                main.game.player.acceleration.y = 0
+                main.game.player.acceleration.x = 0
+                main.game.player.velocity.y = 0
+                main.game.player.velocity.x = 0
                 collisionnumber = 4
 
         return collisionnumber

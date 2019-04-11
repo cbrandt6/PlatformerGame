@@ -44,14 +44,23 @@ class Game:
         if self.level.firstDraw:
             self.player.position = self.level.spawnCoords
 
-        # Check if the player has collided with and of the level rectangles
+        # Check if the player has collided with any of the level rectangles
         collision = self.level.checkcollision()
 
+        # If the player collided with a platform the player will handle it
         if collision < 4:
             self.player.col = collision
+
+        # If the player collided with a hazard respawn them at the beginning of the level
         elif collision == 4:
             self.player.position.x = self.level.spawnCoords[0]
             self.player.position.y = self.level.spawnCoords[1]
+
+        # If the level has changed spawn the player at the beginning of the level
+        elif collision == -2:
+            self.player.position.x = self.level.spawnCoords[0]
+            self.player.position.y = self.level.spawnCoords[1]
+
         # update player sprite
         self.player.update()
 
