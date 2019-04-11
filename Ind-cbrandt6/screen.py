@@ -3,13 +3,18 @@ import settings
 
 # This file will contain all the level layouts, and will draw them when called from the main function
 rectArr = []
+hazardArr = []
 
 levelcnt = 0
 endingCoords = ()
+firstDraw = ''
+
+
 class levels:
 
     def __init__(self):
         global levelcnt
+        global firstDraw
         # Main function will not call this file to create the display surface
         # Initialize pygame
         py.init()
@@ -18,17 +23,18 @@ class levels:
 
         # This is the title bar caption
         py.display.set_caption(settings.TITLE)
-        levelcnt = 1
+        levelcnt = 2
         # Redraw the window
         self.DISPLAYSURF.fill(settings.BLACK)
         # This is just kinda style rectangle
         # py.draw.rect(self.DISPLAYSURF, settings.BLUE, (10, 10, settings.WIDTH - 20, settings.HEIGHT - 20))
-        self.firstDraw = True
-        self.lvlone()
+        firstDraw = True
+        self.lvltwo()
 
     def redraw(self):
         global levelcnt
         global endingCoords
+        global firstDraw
         # Redraw the window
         self.DISPLAYSURF.fill(settings.BLACK)
         # This is just kinda style rectangle
@@ -39,7 +45,7 @@ class levels:
             self.lvltwo()
 
         # If it is not the first time drawing the level, don't keep redrawing the rectangles
-        if not self.firstDraw:
+        if not firstDraw:
             for i in rectArr:
                 # Check to see if the rectangle is the one that ends the level, and if it is paint it green
                 if levelcnt == 1 and i.left == endingCoords[0] and i.top == endingCoords[1]:
@@ -51,10 +57,11 @@ class levels:
 
     def lvlone(self):
         global endingCoords
+        global firstDraw
         # Creating rectangle objects and appending them to a list
         # They are not being drawn here
 
-        if self.firstDraw:
+        if firstDraw:
             # Clear the rectangle list in case there are leftovers from something
             rectArr.clear()
             endingCoords = (1340, 50)
@@ -92,12 +99,18 @@ class levels:
             # Rectangle that transports player to next level
             rectArr.append(py.Rect(endingCoords[0], endingCoords[1], 20, 20))
 
-            self.firstDraw = False
+            firstDraw = False
 
     def lvltwo(self):
-        rectArr.clear()
-        rectArr.append(py.Rect(settings.WIDTH / 4, settings.HEIGHT / 2, 20, 100))
-        rectArr.append(py.Rect((settings.WIDTH / 4) * 2, settings.HEIGHT / 2, 20, 100))
+        global firstDraw
+        global endingCoords
+
+        # If it is the first time drawing the level, clear the rectArr
+        if firstDraw:
+            rectArr.clear()
+            rectArr.append(py.Rect(0, 150, 75, 8))
+
+            firstDraw = False
 
     def lvlthree(self):
         pass
@@ -107,14 +120,18 @@ def checkcollision():
     global rectArr
     global levelcnt
     global endingCoords
+    global firstDraw
     import main
     play = main.game.player
     for rect in rectArr:
 
         # The player is reached through main because it needs to be the instantiated player object
         if rect.colliderect(main.game.player.rect):
+            # If it is the first level, and the player has collided with the portal rect
+            # Change the level, and signify that it is the first drawing of the new level
             if levelcnt == 1 and rect.x == endingCoords[0] and rect.y == endingCoords[1]:
                 levelcnt = 2
+                firstDraw = True
 
             # If there is a collision there is no need to continue through the rest of the list
             # If the player collides with the bottom of the platform, return 0, return 1 for the top

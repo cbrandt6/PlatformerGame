@@ -39,7 +39,7 @@ class Game:
     # Perform game loop updates
     def update(self):
 
-        # update sprites
+        # update player sprite
         self.player.update()
 
         # Update the display
@@ -50,7 +50,7 @@ class Game:
 
 
         # print("dt =", settings.dt)
-        print(settings.Clock.get_fps())
+        # print(settings.Clock.get_fps())
 
     # Handle game loop events
     def events(self):
