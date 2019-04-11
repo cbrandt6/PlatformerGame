@@ -55,6 +55,11 @@ class levels:
                 else:
                     py.draw.rect(self.DISPLAYSURF, settings.BLUE, i)
 
+            # Draw hazards if the array is not empty
+            if hazardArr:
+                for l in hazardArr:
+                    py.draw.rect(self.DISPLAYSURF, settings.RED, l)
+
     def lvlone(self):
         global endingCoords
         global firstDraw
@@ -108,7 +113,25 @@ class levels:
         # If it is the first time drawing the level, clear the rectArr
         if firstDraw:
             rectArr.clear()
+            # Starting platform
             rectArr.append(py.Rect(0, 150, 75, 8))
+
+            # First hazard wall
+            hazardArr.append(py.Rect(300, 0, 8, settings.HEIGHT - 175))
+            hazardArr.append(py.Rect(300, settings.HEIGHT - 125, 8, settings.HEIGHT - 125))
+
+            # Platforms leading up to spiral
+            y = settings.HEIGHT - 125
+            for i in range(5):
+                # Alternating platforms left and right
+                if i % 2 == 0:
+                    x = 450
+                else:
+                    x = 300
+                # Add rect to list
+                rectArr.append(py.Rect(x, y, 50, 8))
+                #Raise the next platform
+                y -= 125
 
             firstDraw = False
 
@@ -123,8 +146,8 @@ def checkcollision():
     global firstDraw
     import main
     play = main.game.player
-    for rect in rectArr:
 
+    for rect in rectArr:
         # The player is reached through main because it needs to be the instantiated player object
         if rect.colliderect(main.game.player.rect):
             # If it is the first level, and the player has collided with the portal rect
