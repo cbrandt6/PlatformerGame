@@ -6,6 +6,7 @@ rectArr = []
 hazardArr = []
 
 levelcnt = 0
+spawnCoords = ()
 endingCoords = ()
 firstDraw = ''
 
@@ -62,6 +63,7 @@ class levels:
 
     def lvlone(self):
         global endingCoords
+        global spawnCoords
         global firstDraw
         # Creating rectangle objects and appending them to a list
         # They are not being drawn here
@@ -70,6 +72,7 @@ class levels:
             # Clear the rectangle list in case there are leftovers from something
             rectArr.clear()
             endingCoords = (1340, 50)
+            spawnCoords = (0, settings.HEIGHT)
             # Initial height of the platforms
             y = settings.HEIGHT - 100
 
@@ -109,10 +112,12 @@ class levels:
     def lvltwo(self):
         global firstDraw
         global endingCoords
+        global spawnCoords
 
         # If it is the first time drawing the level, clear the rectArr
         if firstDraw:
             rectArr.clear()
+            spawnCoords = (1, 125)
             # Starting platform
             rectArr.append(py.Rect(0, 150, 75, 8))
 
@@ -130,13 +135,18 @@ class levels:
                     x = 300
                 # Add rect to list
                 rectArr.append(py.Rect(x, y, 50, 8))
-                #Raise the next platform
+                # Raise the next platform
                 y -= 125
+
 
             firstDraw = False
 
     def lvlthree(self):
         pass
+
+    # return the current level
+    def currlevel(self):
+        return levelcnt
 
 
 def checkcollision():

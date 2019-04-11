@@ -41,7 +41,7 @@ class Game:
 
         # update player sprite
         self.player.update()
-
+        
         # Update the display
         Py.display.flip()
 
