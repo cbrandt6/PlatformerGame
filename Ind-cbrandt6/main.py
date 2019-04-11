@@ -38,10 +38,11 @@ class Game:
 
     # Perform game loop updates
     def update(self):
-
+        
+        self.player.col = self.level.checkcollision()
         # update player sprite
         self.player.update()
-        
+
         # Update the display
         Py.display.flip()
 

@@ -22,7 +22,7 @@ class Player(settings.Py.sprite.Sprite):
         self.velocity = vec(0, 0)
         self.acceleration = vec(0, 0)
         self.keys = ''
-
+        self.col = ''
         self.onPlat = False
 
     def update(self):
@@ -61,8 +61,8 @@ class Player(settings.Py.sprite.Sprite):
             self.onPlat = False
 
     def physiccalc(self):
-        import screen
-        col = screen.checkcollision()
+        #import screen
+        # self.col = screen.checkcollision()
         #print(col)
         # Using physics equations for motion
         # Applies friction and creates a max speed
@@ -70,7 +70,7 @@ class Player(settings.Py.sprite.Sprite):
         # -------------- X Motion -------------- #
         # a = v * friction
         # The player has not hit the side of a platform motion as normal
-        if col != 2 and col != 3:
+        if self.col != 2 and self.col != 3:
             self.acceleration.x += self.velocity.x * settings.FRIC
             # print("Xaccel = ", self.acceleration.x)
 
@@ -82,13 +82,13 @@ class Player(settings.Py.sprite.Sprite):
             self.position.x += self.velocity.x + (0.5 * self.acceleration.x * math.pow(settings.dt, 2))
         # The player has hit the side of a platform
         # Stop the x velocity and acceleration
-        elif col == 2 or col == 3:
+        elif self.col == 2 or self.col == 3:
             self.velocity.x = 0
             self.acceleration.x = 0
-            if col == 2:
+            if self.col == 2:
                 self.position.x += -2
                 self.acceleration.x = -1
-            elif col == 3:
+            elif self.col == 3:
                 self.position.x += 2
                 self.acceleration.x = 1
         # -------------- X Motion -------------- #
@@ -97,7 +97,7 @@ class Player(settings.Py.sprite.Sprite):
         # print("y pos= ", self.position.y)
         # If the y position is not on the ground or a platform continue to accelerate downwards
         # col = 1 means player is on top of a plat, 0 means they have hit the bottom
-        if self.position.y < settings.floorYCoord and col != 1:
+        if self.position.y < settings.floorYCoord and self.col != 1:
             self.acceleration.y = -settings.GRAV
             self.velocity.y += self.acceleration.y * settings.dt
             # print("y vel= ", self.velocity.y)
@@ -116,7 +116,7 @@ class Player(settings.Py.sprite.Sprite):
             # Velocity was already multiplied by time
             self.position.y += self.velocity.y + (0.5 * self.acceleration.y * math.pow(settings.dt, 2))
 
-        if col == 1:
+        if self.col == 1:
             self.velocity.y = 0
             self.onPlat = True
         # print("Yvel =", self.velocity.y)
