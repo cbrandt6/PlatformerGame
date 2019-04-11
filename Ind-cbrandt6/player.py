@@ -61,9 +61,8 @@ class Player(settings.Py.sprite.Sprite):
             self.onPlat = False
 
     def physiccalc(self):
-        #import screen
-        # self.col = screen.checkcollision()
-        #print(col)
+
+        # print(col)
         # Using physics equations for motion
         # Applies friction and creates a max speed
 

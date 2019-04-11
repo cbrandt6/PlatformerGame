@@ -34,6 +34,8 @@ class levels:
         self.DISPLAYSURF.fill(settings.BLACK)
         # This is just kinda style rectangle
         # py.draw.rect(self.DISPLAYSURF, settings.BLUE, (10, 10, settings.WIDTH - 20, settings.HEIGHT - 20))
+        # print(self.firstDraw)
+
         if self.levelcnt == 1:
             self.lvlone()
         if self.levelcnt == 2:
@@ -63,7 +65,7 @@ class levels:
             # Clear the rectangle list in case there are leftovers from something
             self.rectArr.clear()
             self.endingCoords = (1340, 50)
-            self.spawnCoords = (0, settings.HEIGHT)
+            self.spawnCoords = (0, settings.HEIGHT - settings.playerSize)
             # Initial height of the platforms
             y = settings.HEIGHT - 100
 
@@ -105,6 +107,7 @@ class levels:
         # If it is the first time drawing the level, clear the rectArr
         if self.firstDraw:
             self.rectArr.clear()
+            self.endingCoords = (settings.WIDTH, settings.HEIGHT)
             self.spawnCoords = (1, 125)
             # Starting platform
             self.rectArr.append(py.Rect(0, 150, 75, 8))
@@ -136,16 +139,18 @@ class levels:
         return self.levelcnt
 
     def checkcollision(self):
+        # 0-3 will represent collision with platforms, 4 is a collision with a hazard
         import main
         play = main.game.player
-
+        collisionnumber = -1
         for rect in self.rectArr:
             # The player is reached through main because it needs to be the instantiated player object
             if rect.colliderect(main.game.player.rect):
                 # If it is the first level, and the player has collided with the portal rect
                 # Change the level, and signify that it is the first drawing of the new level
-                if self.levelcnt == 1 and rect.x == self.endingCoords[0] and rect.y == self.endingCoords[1]:
-                    self.levelcnt = 2
+                # took out "self.levelcnt == 1 and" to test if it needs to be there
+                if rect.x == self.endingCoords[0] and rect.y == self.endingCoords[1]:
+                    self.levelcnt += 1
                     self.firstDraw = True
 
                 # If there is a collision there is no need to continue through the rest of the list
@@ -153,25 +158,30 @@ class levels:
                 # Return 2 for the left side, and 3 for the right side
 
                 # Player has hit the bottom
-                if play.rect.top - 1 < rect.bottom + 1 < play.rect.bottom + 1:
+                elif play.rect.top - 1 < rect.bottom + 1 < play.rect.bottom + 1:
                     play.position.y = rect.bottom + 1
-                    return 0
+                    collisionnumber = 0
 
                 # Player has landed on the top
-                if play.rect.bottom + 1 >= rect.top - 1 > play.rect.top - 1:
+                elif play.rect.bottom + 1 >= rect.top - 1 > play.rect.top - 1:
                     play.position.y = rect.top - settings.playerSize + 1
+                    collisionnumber = 1
 
-                    return 1
                 # If the right side of the player is equal to the left side of the platform
-                if play.rect.right + 1 > rect.left - 1 > play.rect.left - 1:
+                elif play.rect.right + 1 > rect.left - 1 > play.rect.left - 1:
                     play.position.x = rect.left - settings.playerSize + 1
-                    return 2
+                    collisionnumber = 2
+
                 # If the left side of the player is equal to the right side of the platform
-                if play.rect.left - 1 < rect.right + 1 < play.rect.right + 1:
+                elif play.rect.left - 1 < rect.right + 1 < play.rect.right + 1:
                     play.position.x = rect.right - 1
-                    return 3
+                    collisionnumber = 3
 
+        for rect in self.hazardArr:
+            if rect.colliderect(main.game.player.rect):
+                collisionnumber = 4
 
+        return collisionnumber
 
 
 

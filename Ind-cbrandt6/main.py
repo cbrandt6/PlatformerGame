@@ -23,8 +23,8 @@ class Game:
     # Main game loop
     def run(self):
 
-        self.run = True
-        while self.run:
+        # self.run = True
+        while self.play:
 
             # print("fps =", settings.Clock.get_fps())
             # Check for events
@@ -38,8 +38,20 @@ class Game:
 
     # Perform game loop updates
     def update(self):
-        
-        self.player.col = self.level.checkcollision()
+        # If it is the first time entering the level or they collide with a hazard,
+        # set the player position to the spawn location
+
+        if self.level.firstDraw:
+            self.player.position = self.level.spawnCoords
+
+        # Check if the player has collided with and of the level rectangles
+        collision = self.level.checkcollision()
+
+        if collision < 4:
+            self.player.col = collision
+        elif collision == 4:
+            self.player.position.x = self.level.spawnCoords[0]
+            self.player.position.y = self.level.spawnCoords[1]
         # update player sprite
         self.player.update()
 
@@ -49,18 +61,16 @@ class Game:
         # Tick clock
         settings.dt = settings.Clock.tick_busy_loop(settings.FPS) / 1000
 
-
         # print("dt =", settings.dt)
         # print(settings.Clock.get_fps())
 
-    # Handle game loop events
     def events(self):
         # Event handler to see if game has been closed
         for event in Py.event.get():
             if event.type == Py.QUIT:
                 if self.play:
                     self.play = False
-                self.run = False
+                # self.run = False
 
     # Draw game things
     def draw(self):
