@@ -42,7 +42,7 @@ class levels:
         if not self.firstDraw:
             for i in self.rectArr:
                 # Check to see if the rectangle is the one that ends the level, and if it is paint it green
-                if self.levelCnt == 1 and i.left == self.endingCoords[0] and i.top == self.endingCoords[1]:
+                if i.left == self.endingCoords[0] and i.top == self.endingCoords[1]:
                     py.draw.rect(self.DISPLAYSURF, settings.GREEN, i)
 
                 # Otherwise fill it as blue
@@ -100,7 +100,7 @@ class levels:
             self.firstDraw = False
 
     def lvltwo(self):
-        self.endingCoords = (settings.WIDTH, settings.HEIGHT)
+        self.endingCoords = (1200, 400)
         self.spawnCoords = (5, 5)
         # If it is the first time drawing the level, clear the rectArr
         if self.firstDraw:
@@ -146,10 +146,11 @@ class levels:
             for g in range(3):
                 if g % 2 == 1:
                     k = 650
-                    w = 25
+                    w = 55
                 else:
                     k = 550
                     w = 40
+
                 self.rectArr.append(py.Rect(k, l, w, 8))
                 l -= 100
 
@@ -161,6 +162,16 @@ class levels:
 
             # 3rd bottom
             self.rectArr.append(py.Rect(783, y + 350, 475, 8))
+
+            # Adding hazards to the spiral
+            # Hazard by the ending
+            self.hazardArr.append(py.Rect(1000, 400, 8, 100))
+            # Hazard along right side of screen
+            self.hazardArr.append(py.Rect(settings.WIDTH - 8, y, 8, 550))
+            self.hazardArr.append(py.Rect(550 + 792, y + 8, 8, settings.HEIGHT - 458))
+            self.hazardArr.append(py.Rect(683, settings.HEIGHT - 330, 30, 30))
+            # Ending rect for level 2
+            self.rectArr.append(py.Rect(self.endingCoords[0], self.endingCoords[1], 20, 20))
             self.firstDraw = False
 
 
