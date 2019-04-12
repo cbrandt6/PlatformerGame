@@ -43,7 +43,7 @@ class Game:
 
         # Check if the player has collided with any of the level rectangles
         collision = self.level.checkcollision()
-        print(collision)
+        # print(collision)
         # If the player collided with a platform the player will handle it
         if collision < 4:
             self.player.col = collision
@@ -68,7 +68,7 @@ class Game:
         settings.dt = settings.Clock.tick_busy_loop(settings.FPS) / 1000
 
         # print("dt =", settings.dt)
-        # print(settings.Clock.get_fps())
+        print(settings.Clock.get_fps())
 
     def events(self):
         # Event handler to see if game has been closed

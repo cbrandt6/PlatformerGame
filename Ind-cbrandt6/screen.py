@@ -21,11 +21,11 @@ class levels:
         # Initialize the level fields
         self.rectArr = []
         self.hazardArr = []
-        self.levelCnt = 1
+        self.levelCnt = 2
         self.endingCoords = ()
         self.spawnCoords = ()
         self.firstDraw = True
-        self.lvlone()
+        self.lvltwo()
 
     def redraw(self):
 
@@ -125,7 +125,34 @@ class levels:
                 self.rectArr.append(py.Rect(x, y, 50, 8))
                 # Raise the next platform
                 y -= 125
+            # Bottom part of second hazard wall
+            self.hazardArr.append(py.Rect(550, y, 8, settings.HEIGHT - y))
+            # Top part
+            self.hazardArr.append(py.Rect(550, 0, 8, y - settings.playerSize - 30))
 
+            # Creating the spiral
+            # top platform of spiral
+            self.rectArr.append(py.Rect(558, y, 800, 8))
+            # bottom part of spiral
+            self.rectArr.append(py.Rect(558, settings.HEIGHT - 200, settings.WIDTH - 558, 8))
+            # Right wall of spiral
+            self.rectArr.append(py.Rect(550 + 800, y + 8, 8, settings.HEIGHT - 450))
+            # Second layer bottom of the spiral
+            self.rectArr.append(py.Rect(675, settings.HEIGHT - 300, 675, 8))
+            # Left side of spiral
+            self.rectArr.append(py.Rect(675, y + 100, 8, 350))
+            # Platforms left of spiral
+            l = y + 400
+            for g in range(3):
+                if g % 2 == 1:
+                    k = 650
+                    w = 25
+                else:
+                    k = 550
+                    w = 40
+                self.rectArr.append(py.Rect(k, l, w, 8))
+                l -= 100
+            
             self.firstDraw = False
 
 
