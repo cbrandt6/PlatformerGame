@@ -21,11 +21,11 @@ class levels:
         # Initialize the level fields
         self.rectArr = []
         self.hazardArr = []
-        self.levelCnt = 2
+        self.levelCnt = 1
         self.endingCoords = ()
         self.spawnCoords = ()
         self.firstDraw = True
-        self.lvltwo()
+        self.lvlone()
 
     def redraw(self):
 
@@ -105,7 +105,7 @@ class levels:
         # If it is the first time drawing the level, clear the rectArr
         if self.firstDraw:
             self.rectArr.clear()
-
+            self.hazardArr.clear()
             # Starting platform
             self.rectArr.append(py.Rect(0, 150, 75, 8))
 
@@ -176,7 +176,14 @@ class levels:
 
 
     def lvlthree(self):
-        pass
+        self.endingCoords = (1200, 400)
+        self.spawnCoords = (5, 5)
+        # If it is the first time drawing the level, clear the rectArr
+        if self.firstDraw:
+            self.rectArr.clear()
+            self.hazardArr.clear()
+
+            self.firstDraw = False
 
     # Makes the call to draw the next level when the player has collided with the ending rect
     def nextlevel(self):
