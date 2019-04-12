@@ -142,7 +142,7 @@ class levels:
             # Left side of spiral
             self.rectArr.append(py.Rect(675, y + 100, 8, 350))
             # Platforms left of spiral
-            l = y + 400
+            l = y + 425
             for g in range(3):
                 if g % 2 == 1:
                     k = 650
@@ -152,7 +152,15 @@ class levels:
                     w = 40
                 self.rectArr.append(py.Rect(k, l, w, 8))
                 l -= 100
-            
+
+            # Top of inside of spiral
+            self.rectArr.append(py.Rect(675, y + 100, 575, 8))
+
+            # Inner right side
+            self.rectArr.append(py.Rect(675 + 575, y + 100, 8, 250))
+
+            # 3rd bottom
+            self.rectArr.append(py.Rect(783, y + 350, 475, 8))
             self.firstDraw = False
 
 
