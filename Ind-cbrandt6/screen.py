@@ -21,11 +21,11 @@ class levels:
         # Initialize the level fields
         self.rectArr = []
         self.hazardArr = []
-        self.levelCnt = 1
+        self.levelCnt = 3
         self.endingCoords = ()
         self.spawnCoords = ()
         self.firstDraw = True
-        self.lvlone()
+        self.lvlthree()
 
     def redraw(self):
 
@@ -176,12 +176,79 @@ class levels:
 
 
     def lvlthree(self):
-        self.endingCoords = (1200, 400)
-        self.spawnCoords = (5, 5)
+        self.endingCoords = (20, settings.HEIGHT - 400)
+        self.spawnCoords = (5, settings.HEIGHT - 105 - settings.playerSize)
         # If it is the first time drawing the level, clear the rectArr
         if self.firstDraw:
             self.rectArr.clear()
             self.hazardArr.clear()
+
+            # Hazard along bottom
+            self.hazardArr.append(py.Rect(0, settings.HEIGHT - 8, settings.WIDTH, 8))
+
+            # Starting platform
+            self.rectArr.append(py.Rect(0, settings.HEIGHT - 100, 50, 8))
+
+            # Next platform, as well as the hazard on its side
+            self.rectArr.append(py.Rect(250, settings.HEIGHT - 225, 50, 8))
+            self.hazardArr.append(py.Rect(292, settings.HEIGHT - 245, 8, 20))
+
+            # Platform with hazard on left side
+            self.rectArr.append(py.Rect(400, settings.HEIGHT - 340, 50, 8))
+            self.hazardArr.append(py.Rect(400, settings.HEIGHT - 350, 8, 10))
+
+            # Platform with hazards on both ends
+            self.rectArr.append(py.Rect(600, settings.HEIGHT - 200, 75, 8))
+            self.hazardArr.append(py.Rect(600, settings.HEIGHT - 217, 8, 17))
+            self.hazardArr.append(py.Rect(667, settings.HEIGHT - 217, 8, 17))
+
+            # Platform where player chooses path
+            self.rectArr.append(py.Rect(800, settings.HEIGHT - 300, 150, 8))
+
+            # Right Path
+            self.rectArr.append((py.Rect(1100, settings.HEIGHT - 300, 150, 8)))
+
+            # Hazard walls
+            self.hazardArr.append(py.Rect(1100, 75, 8, (settings.HEIGHT - 300) - 150))
+            self.hazardArr.append(py.Rect(1250, 75, 8, (settings.HEIGHT - 300) - 150))
+
+            # Alternating platforms
+            # Platforms get smaller by 10 px
+            w = 60
+            h = (settings.HEIGHT - 300) - 100
+            for i in range(5):
+                if i % 2 == 0:
+                    p = 1108
+                else:
+                    p = 1250 - w
+                self.rectArr.append(py.Rect(p, h, w, 8))
+                w -= 10
+                h -= 100
+
+            # Top platform
+            self.rectArr.append(py.Rect(700, 75, 400, 8))
+
+            # Left path
+            self.rectArr.append(py.Rect(740, settings.HEIGHT - 400, 15, 8))
+            self.rectArr.append(py.Rect(600, settings.HEIGHT - 500, 15, 8))
+            self.hazardArr.append(py.Rect(600, settings.HEIGHT - 492, 15, 6))
+            self.rectArr.append(py.Rect(400, settings.HEIGHT - 500, 15, 8))
+            self.rectArr.append(py.Rect(350, settings.HEIGHT - 600, 15, 8))
+            # Joining platform
+            self.rectArr.append(py.Rect(450, 150, 100, 8))
+
+            # Ending chute
+            # Hazards on either side of the ending
+            self.hazardArr.append(py.Rect(0, 75, 10, self.endingCoords[1] - 55))
+            self.hazardArr.append(py.Rect(50, 75, 10, self.endingCoords[1] - 55))
+            self.hazardArr.append(py.Rect(0, self.endingCoords[1] + 20, 60, 10))
+
+            # Caps
+            self.rectArr.append(py.Rect(0, 67, 10, 8))
+            self.rectArr.append(py.Rect(50, 67, 250, 8))
+
+            # Ending rect
+            self.rectArr.append(py.Rect(self.endingCoords[0], self.endingCoords[1], 20, 20))
 
             self.firstDraw = False
 
