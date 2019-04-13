@@ -21,11 +21,11 @@ class levels:
         # Initialize the level fields
         self.rectArr = []
         self.hazardArr = []
-        self.levelCnt = 3
+        self.levelCnt = 1
         self.endingCoords = ()
         self.spawnCoords = ()
         self.firstDraw = True
-        self.lvlthree()
+        self.lvlone()
 
     def redraw(self):
 
