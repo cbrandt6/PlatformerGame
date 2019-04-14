@@ -21,11 +21,11 @@ class levels:
         # Initialize the level fields
         self.rectArr = []
         self.hazardArr = []
-        self.levelCnt = 4
+        self.levelCnt = 1
         self.endingCoords = ()
         self.spawnCoords = ()
         self.firstDraw = True
-        self.lvlfour()
+        self.lvlone()
 
     def redraw(self):
 
@@ -322,6 +322,9 @@ class levels:
 
             self.firstDraw = False
 
+    def lvlfive(self):
+        pass
+
     # Makes the call to draw the next level when the player has collided with the ending rect
     def nextlevel(self):
         if self.levelCnt == 1:
@@ -332,6 +335,8 @@ class levels:
             self.lvlthree()
         elif self.levelCnt == 4:
             self.lvlfour()
+        elif self.levelCnt == 5:
+            self.lvlfive()
 
     def checkcollision(self):
         # -1 is no collision, -2 is the ending rectangle
