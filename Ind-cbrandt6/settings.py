@@ -13,7 +13,7 @@ WIDTH = 1500
 
 # Set the FPS
 
-FPS = 120
+FPS = 144
 
 # Window title
 TITLE = "Extreme Platformer"
@@ -25,10 +25,10 @@ floorYCoord = HEIGHT - playerSize
 
 
 # Physics attributes
-ACC = 6
+ACC = 5.9
 FRIC = -1
 GRAV = -7
-JUMP = 4
+JUMP = 3.5
 
 # Create a clock
 Clock = Py.time.Clock()

@@ -137,6 +137,8 @@ class levels:
             self.rectArr.append(py.Rect(558, settings.HEIGHT - 200, settings.WIDTH - 558, 8))
             # Right wall of spiral
             self.rectArr.append(py.Rect(550 + 800, y + 8, 8, settings.HEIGHT - 450))
+            self.hazardArr.append(py.Rect(1358, y + 5, 8, 453))
+
             # Second layer bottom of the spiral
             self.rectArr.append(py.Rect(675, settings.HEIGHT - 300, 675, 8))
             # Left side of spiral
@@ -158,8 +160,8 @@ class levels:
             self.rectArr.append(py.Rect(675, y + 100, 575, 8))
 
             # Inner right side
-            self.rectArr.append(py.Rect(675 + 575, y + 100, 8, 250))
-
+            self.rectArr.append(py.Rect(1250, y + 100, 8, 250))
+            self.hazardArr.append(py.Rect(1258, y + 100, 8, 258))
             # 3rd bottom
             self.rectArr.append(py.Rect(783, y + 350, 475, 8))
 
