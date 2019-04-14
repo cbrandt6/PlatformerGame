@@ -49,15 +49,14 @@ class Game:
             self.player.col = collision
 
         # If the player collided with a hazard respawn them at the beginning of the level
-        elif collision == 4 or collision == 5:
+        elif collision == 4:
             self.player.position.x = self.level.spawnCoords[0]
             self.player.position.y = self.level.spawnCoords[1]
-
-        # If the level has changed spawn the player at the beginning of the level
-        # elif collision == -2:
-        #     self.player.position.x = self.level.spawnCoords[0]
-        #     self.player.position.y = self.level.spawnCoords[1]
-
+            # Increment the death count
+            self.player.deathCount += 1
+        elif collision == 5:
+            self.player.position.x = self.level.spawnCoords[0]
+            self.player.position.y = self.level.spawnCoords[1]
         # update player sprite
         self.player.update()
 
@@ -81,6 +80,9 @@ class Game:
     # Draw game things
     def draw(self):
         self.level.redraw()
+        # Draws the player death count
+        dth = "Death count: " + str(self.player.deathCount)
+        self.level.message_display(dth)
         self.sprites.draw(self.level.DISPLAYSURF)
 
     # Reset the game

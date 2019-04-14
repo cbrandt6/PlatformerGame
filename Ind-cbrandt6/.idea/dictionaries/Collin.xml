@@ -3,7 +3,10 @@
     <words>
       <w>collisionnumber</w>
       <w>coords</w>
+      <w>messagedisplay</w>
+      <w>nextlevel</w>
       <w>respawn</w>
+      <w>textobjects</w>
     </words>
   </dictionary>
 </component>

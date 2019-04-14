@@ -174,7 +174,6 @@ class levels:
             self.rectArr.append(py.Rect(self.endingCoords[0], self.endingCoords[1], 20, 20))
             self.firstDraw = False
 
-
     def lvlthree(self):
         self.endingCoords = (20, settings.HEIGHT - 400)
         self.spawnCoords = (5, settings.HEIGHT - 105 - settings.playerSize)
@@ -318,5 +317,16 @@ class levels:
 
         return collisionnumber
 
+    # text_objects and message_display were taken from:
+    # https://pythonprogramming.net/displaying-text-pygame-screen/
 
+    def text_objects(self, text, font):
+        textSurface = font.render(text, True, settings.WHITE)
+        return textSurface, textSurface.get_rect()
+
+    def message_display(self, text):
+        largeText = py.font.Font('freesansbold.ttf', 20)
+        TextSurf, TextRect = self.text_objects(text, largeText)
+        TextRect.center = (1410, 20)
+        self.DISPLAYSURF.blit(TextSurf, TextRect)
 

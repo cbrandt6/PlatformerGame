@@ -24,6 +24,7 @@ class Player(settings.Py.sprite.Sprite):
         self.keys = ''
         self.col = ''
         self.onPlat = False
+        self.deathCount = 0
 
     def update(self):
 
