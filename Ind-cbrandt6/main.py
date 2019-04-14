@@ -57,6 +57,7 @@ class Game:
         elif collision == 5:
             self.player.position.x = self.level.spawnCoords[0]
             self.player.position.y = self.level.spawnCoords[1]
+
         # update player sprite
         self.player.update()
 

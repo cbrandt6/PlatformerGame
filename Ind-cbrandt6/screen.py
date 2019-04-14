@@ -21,11 +21,11 @@ class levels:
         # Initialize the level fields
         self.rectArr = []
         self.hazardArr = []
-        self.levelCnt = 1
+        self.levelCnt = 4
         self.endingCoords = ()
         self.spawnCoords = ()
         self.firstDraw = True
-        self.lvlone()
+        self.lvlfour()
 
     def redraw(self):
 
@@ -253,6 +253,75 @@ class levels:
 
             self.firstDraw = False
 
+    def lvlfour(self):
+        self.endingCoords = (20, settings.HEIGHT - 400)
+        self.spawnCoords = (1450, 30)
+        # If it is the first time drawing the level, clear the rectArr
+        if self.firstDraw:
+            self.rectArr.clear()
+            self.hazardArr.clear()
+
+            # Hazard along bottom
+            self.hazardArr.append(py.Rect(0, settings.HEIGHT - 8, settings.WIDTH, 8))
+
+            # spawn platform
+            self.rectArr.append(py.Rect(1430, 80, 70, 8))
+            self.hazardArr.append(py.Rect(1300, 0, 8, 300))
+
+            # Second platform
+            self.rectArr.append(py.Rect(1350, 300, 150, 8))
+
+            # third plat
+            self.rectArr.append(py.Rect(1280, 330, 50, 8))
+            self.hazardArr.append(py.Rect(1200, 230, 8, 110))
+            self.hazardArr.append(py.Rect(1170, 250, 8, 90))
+            self.hazardArr.append(py.Rect(1230, 250, 8, 90))
+
+            # Fourth plat
+            self.rectArr.append(py.Rect(1080, 330, 50, 8))
+            # Hazard under third and fourth plats
+            self.hazardArr.append(py.Rect(875, 338, 455, 8))
+
+            # vertical hazard after fourth
+            self.hazardArr.append(py.Rect(875, 200, 8, 138))
+
+            # Fifth plat
+            self.rectArr.append(py.Rect(825, 200, 50, 8))
+
+            # hazard above 5th plat
+            self.hazardArr.append(py.Rect(750, 150, 200, 8))
+            # beside
+            self.hazardArr.append(py.Rect(742, 150, 8, 258))
+
+            # Sixth plat
+            self.rectArr.append(py.Rect(750, 400, 200, 8))
+            self.hazardArr.append(py.Rect(950, 408, 50, 8))
+            # 7th plat
+            self.rectArr.append(py.Rect(1100, 500, 40, 8))
+
+            self.hazardArr.append(py.Rect(1025, 550, 8, 100))
+            # 8th plat
+            self.rectArr.append(py.Rect(900, 650, 40, 8))
+
+            # stair case
+            x = 700
+            y = 650
+
+            for i in range(5):
+                self.rectArr.append(py.Rect(x, y, 20, 8))
+                self.hazardArr.append(py.Rect(x - 50, y - 100, 8, 100))
+                if i != 3:
+                    x -= 100
+                    y -= 100
+
+                else:
+                    x -= 200
+
+            # Ending rect
+            self.rectArr.append(py.Rect(self.endingCoords[0], self.endingCoords[1], 20, 20))
+
+            self.firstDraw = False
+
     # Makes the call to draw the next level when the player has collided with the ending rect
     def nextlevel(self):
         if self.levelCnt == 1:
@@ -261,6 +330,8 @@ class levels:
             self.lvltwo()
         elif self.levelCnt == 3:
             self.lvlthree()
+        elif self.levelCnt == 4:
+            self.lvlfour()
 
     def checkcollision(self):
         # -1 is no collision, -2 is the ending rectangle
