@@ -81,9 +81,18 @@ class Game:
     # Draw game things
     def draw(self):
         self.level.redraw()
-        # Draws the player death count
-        dth = "Death count: " + str(self.player.deathCount)
-        self.level.message_display(dth)
+
+        if self.level.levelCnt == 5:
+            dthmsg = "You died " + str(self.player.deathCount) + " time(s)"
+            self.level.message_display(dthmsg, (settings.WIDTH / 2), (settings.HEIGHT / 2) - 100)
+            endmsg = "This concludes my Independent Project. Thank you for playing."
+            self.level.message_display(endmsg, (settings.WIDTH / 2), (settings.HEIGHT / 2))
+            exitmsg = "Press ESC to quit"
+            self.level.message_display(exitmsg, (settings.WIDTH / 2), (settings.HEIGHT / 2) + 200)
+        else:
+            # Draws the player death count
+            dth = "Death count: " + str(self.player.deathCount)
+            self.level.message_display(dth, 1410, 20)
         self.sprites.draw(self.level.DISPLAYSURF)
 
     # Reset the game

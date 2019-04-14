@@ -323,7 +323,10 @@ class levels:
             self.firstDraw = False
 
     def lvlfive(self):
-        pass
+        self.hazardArr.clear()
+        self.rectArr.clear()
+        self.spawnCoords = (0, 0)
+
 
     # Makes the call to draw the next level when the player has collided with the ending rect
     def nextlevel(self):
@@ -402,9 +405,9 @@ class levels:
         textSurface = font.render(text, True, settings.WHITE)
         return textSurface, textSurface.get_rect()
 
-    def message_display(self, text):
+    def message_display(self, text, x ,y):
         largeText = py.font.Font('freesansbold.ttf', 20)
         TextSurf, TextRect = self.text_objects(text, largeText)
-        TextRect.center = (1410, 20)
+        TextRect.center = (x, y)
         self.DISPLAYSURF.blit(TextSurf, TextRect)
 
